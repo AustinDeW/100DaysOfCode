@@ -1,5 +1,6 @@
 package austin_d.a100daysofcodetracker;
 //Test comment for github
+//Test 2 comment for github
 class DateException extends Exception
 {
     private static String message = "";
