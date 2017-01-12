@@ -9,7 +9,7 @@ namespace Reminder
         private static readonly MailAddress from = new MailAddress("austinsbotmail@gmail.com", "Austin's Bot");
         private static readonly MailAddress to = new MailAddress("austinrdewitt1@gmail.com");
 
-        const string pw = "Warhawk1!1";
+        string pw = FileHandler.ReadFile(@"C:\Users\austi\Documents\reminder_p.txt")[0];
         public string Subject_
         {
             get; set;
