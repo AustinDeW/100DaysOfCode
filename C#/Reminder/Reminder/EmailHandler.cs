@@ -10,7 +10,7 @@ namespace Reminder
         private static readonly MailAddress from = new MailAddress(ConfigurationManager.AppSettings["FromEmail"], ConfigurationManager.AppSettings["FromEmailDisplayName"]);
         private static readonly MailAddress to = new MailAddress(ConfigurationManager.AppSettings["ToEmail"]);
 
-        string pw = FileHandler.ReadFile(ConfigurationManager.AppSettings["PWFileFromEmailLoginPW"])[0];
+        string pw = "";
         public string Subject_
         {
             get; set;
@@ -20,7 +20,7 @@ namespace Reminder
             get; set;
         }
 
-        public EmailHandler() { }
+        public EmailHandler() { pw = FileHandler.ReadFile(@ConfigurationManager.AppSettings["FromEmailLoginPW"])[0]; }
 
         public void SendEmail()
         {
