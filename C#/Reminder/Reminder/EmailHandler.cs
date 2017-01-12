@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Net;
 using System.Net.Mail;
+using System.Configuration;
 
 namespace Reminder
 {
     class EmailHandler
     {
-        private static readonly MailAddress from = new MailAddress("austinsbotmail@gmail.com", "Austin's Bot");
-        private static readonly MailAddress to = new MailAddress("austinrdewitt1@gmail.com");
+        private static readonly MailAddress from = new MailAddress(ConfigurationManager.AppSettings["FromEmail"], ConfigurationManager.AppSettings["FromEmailDisplayName"]);
+        private static readonly MailAddress to = new MailAddress(ConfigurationManager.AppSettings["ToEmail"]);
 
-        string pw = FileHandler.ReadFile(@"C:\Users\austi\Documents\reminder_p.txt")[0];
+        string pw = FileHandler.ReadFile(ConfigurationManager.AppSettings["PWFileFromEmailLoginPW"])[0];
         public string Subject_
         {
             get; set;
