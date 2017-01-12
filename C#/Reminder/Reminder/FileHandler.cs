@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 
 namespace Reminder
 {
@@ -12,6 +13,15 @@ namespace Reminder
         public static string[] ReadFile(string path)
         {
             return File.ReadAllLines(path);
+        }
+
+        //TODO: Build function
+        public static void UpdateRenewalDate(List<string> dates)
+        {
+            foreach (var s in dates)
+            {
+                System.Console.WriteLine(s);
+            }
         }
     }
 }

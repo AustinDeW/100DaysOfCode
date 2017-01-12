@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.IO;
+using System.Collections.Generic;
+using System.Configuration;
 
+//TODO: Add comments to make easier to understand
 namespace Reminder
 {
     public partial class Form1 : Form
     {
         EmailHandler em = null;
-        string path = @"C:\Users\austi\Google Drive\Reminders.txt";
+        string path = @ConfigurationManager.AppSettings["ReminderFileLocation"];
         int exitTime = 5;
         public Form1()
         {
@@ -37,6 +40,7 @@ namespace Reminder
             {
                 if (File.Exists(path))
                 {
+                    List<string> monthlyReminder = new List<string>();
                     string[] reminders = FileHandler.ReadFile(path);
                     string reminder = "";
                     string strDate = "";
@@ -53,6 +57,12 @@ namespace Reminder
                                 ||  dt.ToString(format) == DateTime.Today.AddDays(3).ToString(format))
                         {
                             reminder += reminders[i].Substring(reminders[i].IndexOf('-') + 1) + " | ";
+
+                            if(reminders[i].EndsWith("*"))
+                            {
+                                monthlyReminder.Add(reminders[i]);
+                            }
+
                             strDate += date + " | ";
                             em.Subject_ = "Reminder: " + reminder;
                             em.Body_ = $"Just a reminder that your {reminder} on {strDate}!";
@@ -61,7 +71,15 @@ namespace Reminder
                     }
 
                     //allows to be sent all in one email.
-                    if(sendEmail) em.SendEmail();
+                    if (sendEmail)
+                    {
+                        em.SendEmail();
+
+                        if (monthlyReminder != null)
+                        {
+                            FileHandler.UpdateRenewalDate(monthlyReminder);
+                        }
+                    }
                 }
             }
             catch (Exception ex)
