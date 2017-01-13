@@ -40,14 +40,14 @@ namespace Reminder
             {
                 if (File.Exists(path))
                 {
-                    List<string> monthlyReminder = new List<string>();
-                    string[] reminders = FileHandler.ReadFile(path);
-                    string reminder = "";
-                    string strDate = "";
-                    bool sendEmail = false;
-                    for (int i = 0; i < reminders.Length; ++i)
+                    List<string> liMonthlyReminder = new List<string>();
+                    string[] sReminders = FileHandler.ReadFile(path);
+                    string sReminder = "";
+                    string sDate = "";
+                    bool bSendEmail = false;
+                    for (int i = 0; i < sReminders.Length; ++i)
                     {
-                        string date = reminders[i].Substring(0, reminders[i].IndexOf('-'));
+                        string date = sReminders[i].Substring(0, sReminders[i].IndexOf('-'));
 
                         DateTime dt = Convert.ToDateTime(date);
 
@@ -56,28 +56,28 @@ namespace Reminder
                         if (dt.ToString(format) == DateTime.Today.ToString(format) 
                                 ||  dt.ToString(format) == DateTime.Today.AddDays(3).ToString(format))
                         {
-                            reminder += reminders[i].Substring(reminders[i].IndexOf('-') + 1) + " | ";
+                            sReminder += sReminders[i].Substring(sReminders[i].IndexOf('-') + 1) + " | ";
 
-                            if(reminders[i].EndsWith("*"))
+                            if(sReminders[i].EndsWith("*"))
                             {
-                                monthlyReminder.Add(reminders[i]);
+                                liMonthlyReminder.Add(sReminders[i]);
                             }
 
-                            strDate += date + " | ";
-                            em.Subject_ = "Reminder: " + reminder;
-                            em.Body_ = $"Just a reminder that your {reminder} on {strDate}!";
-                            sendEmail = true;
+                            sDate += date + " | ";
+                            em.Subject_ = "Reminder: " + sReminder;
+                            em.Body_ = $"Just a reminder that your {sReminder} on {sDate}!";
+                            bSendEmail = true;
                         }
                     }
 
                     //allows to be sent all in one email.
-                    if (sendEmail)
+                    if (bSendEmail)
                     {
                         em.SendEmail();
 
-                        if (monthlyReminder != null)
+                        if (liMonthlyReminder != null)
                         {
-                            FileHandler.UpdateRenewalDate(monthlyReminder);
+                            FileHandler.UpdateRenewalDate(liMonthlyReminder);
                         }
                     }
                 }

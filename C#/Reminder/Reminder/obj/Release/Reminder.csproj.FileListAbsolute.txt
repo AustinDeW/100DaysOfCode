@@ -25,3 +25,6 @@ C:\Users\austi\Documents\GitHub\C#\Reminder\Reminder\obj\Release\Reminder.csproj
 C:\Users\austi\Documents\GitHub\C#\Reminder\Reminder\obj\Release\Reminder.Form1.resources
 C:\Users\austi\Documents\GitHub\C#\Reminder\Reminder\obj\Release\Reminder.Properties.Resources.resources
 C:\Users\austi\Documents\GitHub\C#\Reminder\Reminder\obj\Release\Reminder.csproj.GenerateResource.Cache
+C:\Users\austin.dewitt\Documents\Visual Studio 2015\Projects\GitHub\100DaysOfCode\C#\Reminder\Reminder\bin\Release\Reminder.exe.config
+C:\Users\austin.dewitt\Documents\Visual Studio 2015\Projects\GitHub\100DaysOfCode\C#\Reminder\Reminder\obj\Release\Reminder.exe
+C:\Users\austin.dewitt\Documents\Visual Studio 2015\Projects\GitHub\100DaysOfCode\C#\Reminder\Reminder\obj\Release\Reminder.pdb
