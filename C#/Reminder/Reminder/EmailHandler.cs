@@ -5,6 +5,7 @@ using System.Configuration;
 
 namespace Reminder
 {
+    //TODO: Add Comments EmailHandler.cs
     class EmailHandler
     {
         private static readonly MailAddress from = new MailAddress(ConfigurationManager.AppSettings["FromEmail"], ConfigurationManager.AppSettings["FromEmailDisplayName"]);
@@ -20,7 +21,7 @@ namespace Reminder
             get; set;
         }
 
-        public EmailHandler() { pw = FileHandler.ReadFile(@ConfigurationManager.AppSettings["FromEmailLoginPW"])[0]; }
+        public EmailHandler() { pw = FileHandler.ReadFile(ConfigurationManager.AppSettings["FromEmailLoginPWFileLocation"])[0]; }
 
         public void SendEmail()
         {

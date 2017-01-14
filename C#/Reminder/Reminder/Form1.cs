@@ -8,7 +8,6 @@ namespace Reminder
     public partial class Form1 : Form
     {
         EmailHandler em = null;
-        string path = @ConfigurationManager.AppSettings["ReminderFileLocation"]; // location of file that contains reminders
         int exitTime = 5; // time that application will auto exit
         public Form1()
         {
@@ -18,7 +17,6 @@ namespace Reminder
             try { em = new EmailHandler(); }
             catch (Exception ex) { Console.WriteLine("\n\n" + ex.Message + "\n\n" + ex.StackTrace); }
 
-            timerExit.Start(); // start auto exit countdown timer
             CheckForReminder();
         }
 
@@ -34,7 +32,7 @@ namespace Reminder
 
             string strReminder = renewalDate + "-" + reminderName + Environment.NewLine;
             Console.WriteLine($"Reminder added : {strReminder}\n\n");
-            FileHandler.WriteFile(path, strReminder);
+            FileHandler.WriteFile(strReminder);
         }
 
         /// <summary>
@@ -44,32 +42,34 @@ namespace Reminder
         {
             try
             {
-                if (File.Exists(path))
+                if (File.Exists(ConfigurationManager.AppSettings["ReminderFileLocation"]))
                 {
-                    List<string> liMonthlyReminder = new List<string>(); // List that contains reminders that need to have date updated
-                    string[] sReminders = FileHandler.ReadFile(path); // All of the reminders from the reminder file
+                    List<string> liMonthlyReminders = new List<string>(); // List that contains reminders that need to have date updated
+                    string[] sReminders = FileHandler.ReadFile(); // All of the reminders from the reminder file
                     string sReminder = "";
                     string sDate = "";
                     bool bSendEmail = false;
                     for (int i = 0; i < sReminders.Length; ++i)
                     {
                         // Reminder date
-                        string date = sReminders[i].Substring(0, sReminders[i].IndexOf('-'));
+                        string date = Utilities.GetDateFromReminder(sReminders[i]);
 
                         DateTime dt = Convert.ToDateTime(date);
 
-                        string format = "MM/dd/yyyy";
+                        string format = Utilities.DATE_FORMAT;
 
                         //TODO: Allow user to specify time frame to send reminder
-                        if (dt.ToString(format) == DateTime.Today.ToString(format) 
-                                ||  dt.ToString(format) == DateTime.Today.AddDays(3).ToString(format)) // Checks if a reminder is within the time frame
+                        bool bRenewsToday = dt.ToString(format) == DateTime.Today.ToString(format);
+                        bool bRenewsIn3Days = dt.ToString(format) == DateTime.Today.AddDays(3).ToString(format);
+                        if (bRenewsToday || bRenewsIn3Days) // Checks if a reminder is within the time frame
                         {
-                            sReminder += sReminders[i].Substring(sReminders[i].IndexOf('-') + 1) + " | ";
-
-                            if(sReminders[i].EndsWith("*")) // '*' signifies a reminder that needs to be auto updated
+                            if (sReminders[i].EndsWith("*") && bRenewsToday) // '*' signifies a reminder that needs to be auto updated
                             {
-                                liMonthlyReminder.Add(sReminders[i]);
+                                liMonthlyReminders.Add(sReminders[i]);
                             }
+
+                            sReminder += Utilities.GetReminderTitleFromReminder(sReminders[i]) + " | ";
+
 
                             sDate += date + " | ";
                             em.Subject_ = "Reminder: " + sReminder;
@@ -81,11 +81,11 @@ namespace Reminder
                     //allows to be sent all in one email.
                     if (bSendEmail)
                     {
-                        em.SendEmail();
+                        //em.SendEmail();
 
-                        if (liMonthlyReminder != null)
+                        if (liMonthlyReminders != null)
                         {
-                            FileHandler.UpdateRenewalDate(liMonthlyReminder);
+                            FileHandler.UpdateRenewalDate(liMonthlyReminders, sReminders);
                         }
                     }
                 }
@@ -94,6 +94,8 @@ namespace Reminder
             {
                 Console.WriteLine(ex.Message + "\n" + ex.StackTrace);
             }
+
+            timerExit.Start(); // start auto exit countdown timer
         }
 
         private void timerExit_Tick(object sender, EventArgs e)

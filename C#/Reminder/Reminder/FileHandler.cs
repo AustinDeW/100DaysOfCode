@@ -1,13 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Configuration;
+using System;
+using System.Text;
 
 namespace Reminder
 {
+    //TODO: Add comments to FileHandler.cs
     static class FileHandler
     {   
-        public static void WriteFile(string path, string contents)
+        public static void WriteFile(string contents)
         {
-            File.AppendAllText(path, contents);
+            File.AppendAllText(ConfigurationManager.AppSettings["ReminderFileLocation"], contents);
+        }
+
+        public static string[] ReadFile()
+        {
+            return File.ReadAllLines(ConfigurationManager.AppSettings["ReminderFileLocation"]);
         }
 
         public static string[] ReadFile(string path)
@@ -15,13 +24,24 @@ namespace Reminder
             return File.ReadAllLines(path);
         }
 
-        //TODO: Build function
-        public static void UpdateRenewalDate(List<string> dates)
+
+        //TODO: Specify update renewal period, such as Month or Year or Day
+        public static void UpdateRenewalDate(List<string> liMonthlyReminders, string[] sReminders)
         {
-            foreach (var s in dates)
+            for (int i = 0; i < sReminders.Length; i++)
             {
-                System.Console.WriteLine(s);
+                for (int j = 0; j < liMonthlyReminders.Count; j++)
+                {
+                    if (liMonthlyReminders[j] == sReminders[i])
+                    {
+                        DateTime dtNextMonth = Convert.ToDateTime(Utilities.GetDateFromReminder(sReminders[i])).AddMonths(1);
+                        sReminders[i] = dtNextMonth.ToString(Utilities.DATE_FORMAT) + "-" + Utilities.GetReminderTitleFromReminder(sReminders[i]);
+                    }
+                }
             }
+
+            File.Delete(ConfigurationManager.AppSettings["ReminderFileLocation"]);
+            WriteFile(string.Join(Environment.NewLine,sReminders));
         }
     }
 }
