@@ -45,16 +45,12 @@ namespace Reminder
                 if (File.Exists(ConfigurationManager.AppSettings["ReminderFileLocation"]))
                 {
                     List<string> liMonthlyReminders = new List<string>(); // List that contains reminders that need to have date updated
-                    string[] sReminders = FileHandler.ReadFile(); // All of the reminders from the reminder file
-                    string sReminder = "";
+                    Reminder[] rReminders = Utilities.StringArrToReminderArr(FileHandler.ReadFile());// All of the reminders from the reminder file
                     string sDate = "";
-                    bool bSendEmail = false;
-                    for (int i = 0; i < sReminders.Length; ++i)
+                    string sReminder = "";
+                    for (int i = 0; i < rReminders.Length; ++i)
                     {
-                        // Reminder date
-                        string date = Utilities.GetDateFromReminder(sReminders[i]);
-
-                        DateTime dt = Convert.ToDateTime(date);
+                        DateTime dt = Convert.ToDateTime(rReminders[i].Date);
 
                         string format = Utilities.DATE_FORMAT;
 
@@ -63,29 +59,28 @@ namespace Reminder
                         bool bRenewsIn3Days = dt.ToString(format) == DateTime.Today.AddDays(3).ToString(format);
                         if (bRenewsToday || bRenewsIn3Days) // Checks if a reminder is within the time frame
                         {
-                            if (sReminders[i].EndsWith("*") && bRenewsToday) // '*' signifies a reminder that needs to be auto updated
+                            if (rReminders[i].Description.EndsWith("*") && bRenewsToday) // '*' signifies a reminder that needs to be auto updated
                             {
-                                liMonthlyReminders.Add(sReminders[i]);
+                                liMonthlyReminders.Add(rReminders[i].Description);
                             }
 
-                            sReminder += Utilities.GetReminderTitleFromReminder(sReminders[i]) + " | ";
-
-
-                            sDate += date + " | ";
-                            em.Subject_ = "Reminder: " + sReminder;
-                            em.Body_ = $"Just a reminder that your {sReminder} on {sDate}!";
-                            bSendEmail = true;
+                            // Concatenates so that I can store all reminders and dates in one string
+                            // so all reminders can be sent in one email
+                            sReminder += rReminders[i].Description + " | ";
+                            sDate += rReminders[i].Date + " | ";
                         }
                     }
 
-                    //allows to be sent all in one email.
-                    if (bSendEmail)
+                    // If sReminder has text in it, then email should be sent
+                    if (sReminder != "")
                     {
-                        //em.SendEmail();
+                        em.Subject_ = "Reminder: " + sReminder;
+                        em.Body_ = $"Just a reminder that your {sReminder} on {sDate}!";
+                        em.SendEmail();
 
                         if (liMonthlyReminders != null)
                         {
-                            FileHandler.UpdateRenewalDate(liMonthlyReminders, sReminders);
+                            FileHandler.UpdateRenewalDate(liMonthlyReminders, rReminders);
                         }
                     }
                 }

@@ -43,22 +43,22 @@ namespace Reminder
         /// </summary>
         /// <param name="liMonthlyReminders">List containing reminders that need to be updated</param>
         /// <param name="sReminders">Array of all of the reminders in the file</param>
-        public static void UpdateRenewalDate(List<string> liMonthlyReminders, string[] sReminders)
+        public static void UpdateRenewalDate(List<string> liMonthlyReminders, Reminder[] rReminders)
         {
-            for (int i = 0; i < sReminders.Length; i++)
+            for (int i = 0; i < rReminders.Length; i++)
             {
                 for (int j = 0; j < liMonthlyReminders.Count; j++)
                 {
-                    if (liMonthlyReminders[j] == sReminders[i]) // updates the reminders date
+                    if (liMonthlyReminders[j] == rReminders[i].Description) // updates the reminders date
                     {
-                        DateTime dtNextMonth = Convert.ToDateTime(Utilities.GetDateFromReminder(sReminders[i])).AddMonths(1);
-                        sReminders[i] = dtNextMonth.ToString(Utilities.DATE_FORMAT) + "-" + Utilities.GetReminderTitleFromReminder(sReminders[i]);
+                        DateTime dtNextMonth = Convert.ToDateTime(rReminders[i].Date).AddMonths(1);
+                        rReminders[i].Date = dtNextMonth.ToString(Utilities.DATE_FORMAT);
                     }
                 }
             }
 
             File.Delete(ConfigurationManager.AppSettings["ReminderFileLocation"]);
-            WriteFile(string.Join(Environment.NewLine,sReminders));
+            WriteFile(Utilities.ReminderArrToString(rReminders));
         }
     }
 }
