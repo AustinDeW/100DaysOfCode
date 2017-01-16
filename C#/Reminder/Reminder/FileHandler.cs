@@ -2,7 +2,6 @@
 using System.IO;
 using System.Configuration;
 using System;
-using System.Text;
 
 namespace Reminder
 {
