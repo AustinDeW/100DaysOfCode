@@ -43,10 +43,31 @@ namespace Reminder
             return rReminders;
         }
 
-        //TODO: Build function
         public static string ReminderArrToString(Reminder[] rReminders)
         {
-            return "";
+            StringBuilder sbReminder = new StringBuilder();
+
+            for(int i = 0; i < rReminders.Length; i++)
+            {
+                int iReminderPeriodLength = rReminders[i].ReminderPeriod.Length;
+                sbReminder.Append("(");
+                for(int j = 0; j < iReminderPeriodLength; j++)
+                {
+                    sbReminder.Append(rReminders[i].ReminderPeriod[j]);
+                    
+                    if(j != iReminderPeriodLength - 1)
+                    {
+                        sbReminder.Append(",");
+                    }
+                }
+                sbReminder.Append(")-");
+                sbReminder.Append(rReminders[i].Date);
+                sbReminder.Append("-");
+                sbReminder.Append(rReminders[i].Description);
+                sbReminder.Append(Environment.NewLine);
+            }
+
+            return sbReminder.ToString();
         }
     }
 }

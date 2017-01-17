@@ -44,6 +44,7 @@ namespace Reminder
         /// <param name="sReminders">Array of all of the reminders in the file</param>
         public static void UpdateRenewalDate(List<string> liMonthlyReminders, Reminder[] rReminders)
         {
+            Console.WriteLine("Started updating reminder file...");
             for (int i = 0; i < rReminders.Length; i++)
             {
                 for (int j = 0; j < liMonthlyReminders.Count; j++)
@@ -58,6 +59,7 @@ namespace Reminder
 
             File.Delete(ConfigurationManager.AppSettings["ReminderFileLocation"]);
             WriteFile(Utilities.ReminderArrToString(rReminders));
+            Console.WriteLine("done.");
         }
     }
 }

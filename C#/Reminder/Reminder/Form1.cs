@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Configuration;
 namespace Reminder
 {
+    //TODO: Have 'catch' statements send error email
     public partial class Form1 : Form
     {
         EmailHandler em = null;
@@ -50,15 +51,11 @@ namespace Reminder
                     string sReminder = "";
                     for (int i = 0; i < rReminders.Length; ++i)
                     {
-                        DateTime dt = Convert.ToDateTime(rReminders[i].Date);
+                        DateTime dtReminderDate = Convert.ToDateTime(rReminders[i].Date);
+                        bool bRenewsToday = dtReminderDate.ToString(Utilities.DATE_FORMAT) == DateTime.Today.ToString(Utilities.DATE_FORMAT);
 
-                        string format = Utilities.DATE_FORMAT;
-
-                        //TODO: Allow user to specify time frame to send reminder
-                        bool bRenewsToday = dt.ToString(format) == DateTime.Today.ToString(format);
-                        bool bRenewsIn3Days = dt.ToString(format) == DateTime.Today.AddDays(3).ToString(format);
-                        if (bRenewsToday || bRenewsIn3Days) // Checks if a reminder is within the time frame
-                        {
+                        if (bRenewsToday || CheckIfReminderIsWithinDateRange(rReminders[i].ReminderPeriod, dtReminderDate))
+                        { 
                             if (rReminders[i].Description.EndsWith("*") && bRenewsToday) // '*' signifies a reminder that needs to be auto updated
                             {
                                 liMonthlyReminders.Add(rReminders[i].Description);
@@ -69,6 +66,7 @@ namespace Reminder
                             sReminder += rReminders[i].Description + " | ";
                             sDate += rReminders[i].Date + " | ";
                         }
+
                     }
 
                     // If sReminder has text in it, then email should be sent
@@ -90,7 +88,27 @@ namespace Reminder
                 Console.WriteLine(ex.Message + "\n" + ex.StackTrace);
             }
 
-            timerExit.Start(); // start auto exit countdown timer
+            timerExit.Start(); // Start auto-exit countdown timer
+        }
+
+        /// <summary>
+        /// Checks to see if today's date is x days from the reminder's date 
+        /// </summary>
+        /// <param name="iReminderPeriod">Array of days to add to today's date</param>
+        /// <param name="dtReminderDate">Date of a reminder</param>
+        /// <returns>Whether or not today's date is within the specified range</returns>
+        private bool CheckIfReminderIsWithinDateRange(int[] iReminderPeriod, DateTime dtReminderDate)
+        {
+            for(int i = 0; i < iReminderPeriod.Length; i++)
+            {
+                // Adds x amount of days to today's date to check if the reminder's date is within range
+                if(DateTime.Today.AddDays(iReminderPeriod[i]) == dtReminderDate)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private void timerExit_Tick(object sender, EventArgs e)
