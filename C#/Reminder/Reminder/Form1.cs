@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Configuration;
 namespace Reminder
 {
-    //TODO: Have 'catch' statements send error email
     public partial class Form1 : Form
     {
         EmailHandler em = null;
@@ -16,7 +15,12 @@ namespace Reminder
             tbReminderName.KeyDown += (sender, e) => KeyDown_SubmitReminder(sender, e); // Allows 'enter' key to submit 
 
             try { em = new EmailHandler(); }
-            catch (Exception ex) { Console.WriteLine("\n\n" + ex.Message + "\n\n" + ex.StackTrace); }
+            catch (Exception ex)
+            {
+                Console.WriteLine("\n\n" + ex.Message + "\n\n" + ex.StackTrace);
+                EmailHandler.SendErrorEmail(ex);
+            }
+
 
             CheckForReminder();
         }
@@ -86,6 +90,7 @@ namespace Reminder
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message + "\n" + ex.StackTrace);
+                EmailHandler.SendErrorEmail(ex);
             }
 
             timerExit.Start(); // Start auto-exit countdown timer

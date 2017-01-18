@@ -13,7 +13,15 @@ namespace Reminder
         /// <param name="contents">String to be written</param>
         public static void WriteFile(string contents)
         {
-            File.AppendAllText(ConfigurationManager.AppSettings["ReminderFileLocation"], contents);
+            try
+            {
+                File.AppendAllText(ConfigurationManager.AppSettings["ReminderFileLocation"], contents);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                EmailHandler.SendErrorEmail(ex);
+            }
         }
 
         /// <summary>
@@ -22,7 +30,17 @@ namespace Reminder
         /// <returns>String array filled with the reminders</returns>
         public static string[] ReadFile()
         {
-            return File.ReadAllLines(ConfigurationManager.AppSettings["ReminderFileLocation"]);
+            try
+            {
+                return File.ReadAllLines(ConfigurationManager.AppSettings["ReminderFileLocation"]);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                EmailHandler.SendErrorEmail(ex);
+
+                return new string[0];
+            }
         }
 
         /// <summary>
@@ -32,7 +50,17 @@ namespace Reminder
         /// <returns>String array filled with contents from given file</returns>
         public static string[] ReadFile(string path)
         {
-            return File.ReadAllLines(path);
+            try
+            {
+                return File.ReadAllLines(path);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                EmailHandler.SendErrorEmail(ex);
+
+                return new string[0];
+            }
         }
 
 
@@ -44,22 +72,30 @@ namespace Reminder
         /// <param name="sReminders">Array of all of the reminders in the file</param>
         public static void UpdateRenewalDate(List<string> liMonthlyReminders, Reminder[] rReminders)
         {
-            Console.Write("\nStarted updating reminder file...");
-            for (int i = 0; i < rReminders.Length; i++)
+            try
             {
-                for (int j = 0; j < liMonthlyReminders.Count; j++)
+                Console.Write("\nStarted updating reminder file...");
+                for (int i = 0; i < rReminders.Length; i++)
                 {
-                    if (liMonthlyReminders[j] == rReminders[i].Description) // updates the reminders date
+                    for (int j = 0; j < liMonthlyReminders.Count; j++)
                     {
-                        DateTime dtNextMonth = Convert.ToDateTime(rReminders[i].Date).AddMonths(1);
-                        rReminders[i].Date = dtNextMonth.ToString(Utilities.DATE_FORMAT);
+                        if (liMonthlyReminders[j] == rReminders[i].Description) // updates the reminders date
+                        {
+                            DateTime dtNextMonth = Convert.ToDateTime(rReminders[i].Date).AddMonths(1);
+                            rReminders[i].Date = dtNextMonth.ToString(Utilities.DATE_FORMAT);
+                        }
                     }
                 }
-            }
 
-            File.Delete(ConfigurationManager.AppSettings["ReminderFileLocation"]);
-            WriteFile(Utilities.ReminderArrToString(rReminders));
-            Console.WriteLine("done.");
+                File.Delete(ConfigurationManager.AppSettings["ReminderFileLocation"]);
+                WriteFile(Utilities.ReminderArrToString(rReminders));
+                Console.WriteLine("done.");
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                EmailHandler.SendErrorEmail(ex);
+            }
         }
     }
 }
