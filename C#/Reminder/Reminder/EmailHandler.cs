@@ -46,7 +46,7 @@ namespace Reminder
         }
 
         /// <summary>
-        /// Sends an email using gmail
+        /// Sends an email
         /// </summary>
         public void SendEmail()
         {
