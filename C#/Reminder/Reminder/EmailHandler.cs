@@ -6,6 +6,8 @@ using System.Configuration;
 namespace Reminder
 {
     //TODO: Add Comments EmailHandler.cs
+    //TODO: Should this be a static class?
+    //TODO: Add other email clients, such as ( yahoo, outlook )
     class EmailHandler
     {
         private static readonly MailAddress from = new MailAddress(ConfigurationManager.AppSettings["FromEmail"], ConfigurationManager.AppSettings["FromEmailDisplayName"]);

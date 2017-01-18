@@ -44,7 +44,7 @@ namespace Reminder
         /// <param name="sReminders">Array of all of the reminders in the file</param>
         public static void UpdateRenewalDate(List<string> liMonthlyReminders, Reminder[] rReminders)
         {
-            Console.Write("Started updating reminder file...");
+            Console.Write("\nStarted updating reminder file...");
             for (int i = 0; i < rReminders.Length; i++)
             {
                 for (int j = 0; j < liMonthlyReminders.Count; j++)
