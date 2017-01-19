@@ -5,7 +5,7 @@ using System.Configuration;
 
 namespace Reminder
 {
-    //TODO: Add other email clients, such as ( yahoo, outlook )
+    //TODO: Add other email clients, such as ( yahoo, outlook )..done..needs to be tested
     class EmailHandler
     {
         // Email address that the reminders will be sent from
@@ -16,19 +16,53 @@ namespace Reminder
         // Password to the 'from' email address so that program can login and send email.
         string pw = "";
 
-        /// <summary>
-        /// Email subject
-        /// </summary>
+        struct Host
+        {
+            public string EmailClient;
+            public string EmailSMTPHost;
+            public Host(string client, string host)
+            {
+                EmailClient = client;
+                EmailSMTPHost = host;
+            }
+        }
+
+        // Email subject
         public string Subject_
         {
             get; set;
         }
-        /// <summary>
-        /// Email body
-        /// </summary>
+
+        // Email body
         public string Body_
         {
             get; set;
+        }
+
+        // Email host
+        public string Host_
+        {
+            get
+            {
+                Host[] hosts = new Host[3]  //"smtp.gmail.com", // "smtp.mail.yahoo.com", "smtp.live.com"
+                {
+                    new Host("@gmail.com","smtp.gmail.com"),
+                    new Host("@yahoo.com","smtp.mail.yahoo.com"),
+                    new Host("@hotmail.com","smtp.live.com")
+                };
+
+                string host = "";
+                for(int i = 0; i < hosts.Length; i++)
+                {
+                    if (from.Address.Contains(hosts[i].EmailClient))
+                    {
+                        host = hosts[i].EmailSMTPHost;
+                        break;
+                    }
+                }
+                return host;
+            }
+            set { }
         }
 
         public EmailHandler()
@@ -42,18 +76,18 @@ namespace Reminder
             {
                 Console.WriteLine("Unable to get password for email.\n\n" + ex.Message);
             }
-            
         }
 
         /// <summary>
-        /// Sends an email using gmail
+        /// Sends an email
         /// </summary>
         public void SendEmail()
         {
             Console.Write($"Sending email to {to}...");
+
             SmtpClient mailClient = new SmtpClient
             {
-                Host = "smtp.gmail.com",
+                Host = Host_, 
                 Port = 587,
                 EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
