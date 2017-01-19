@@ -3,6 +3,8 @@ using System.Windows.Forms;
 using System.IO;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Text;
+
 namespace Reminder
 {
     public partial class Form1 : Form
@@ -40,7 +42,6 @@ namespace Reminder
             FileHandler.WriteFile(strReminder);
         }
 
-        //TODO: Change the way email message is composed
         /// <summary>
         /// Checks the reminder file to see if there are any reminders within the time frame
         /// </summary>
@@ -52,15 +53,16 @@ namespace Reminder
                 {
                     List<string> liMonthlyReminders = new List<string>(); // List that contains reminders that need to have date updated
                     Reminder[] rReminders = Utilities.StringArrToReminderArr(FileHandler.ReadFile());// All of the reminders from the reminder file
-                    string sDate = "";
-                    string sReminder = "";
-                    for (int i = 0; i < rReminders.Length; ++i)
+                    StringBuilder sbReminder = new StringBuilder();
+
+                    int intRemindersLength = rReminders.Length;
+                    for (int i = 0; i < intRemindersLength; ++i)
                     {
                         DateTime dtReminderDate = Convert.ToDateTime(rReminders[i].Date);
                         bool bRenewsToday = dtReminderDate.ToString(Utilities.DATE_FORMAT) == DateTime.Today.ToString(Utilities.DATE_FORMAT);
 
                         if (bRenewsToday || CheckIfReminderIsWithinDateRange(rReminders[i].ReminderPeriod, dtReminderDate))
-                        { 
+                        {
                             if (rReminders[i].Description.EndsWith("*") && bRenewsToday) // '*' signifies a reminder that needs to be auto updated
                             {
                                 liMonthlyReminders.Add(rReminders[i].Description);
@@ -68,18 +70,21 @@ namespace Reminder
 
                             // Concatenates so that I can store all reminders and dates in one string
                             // so all reminders can be sent in one email
-                            sReminder += rReminders[i].Description + " | ";
-                            sDate += rReminders[i].Date + " | ";
+                            sbReminder.Append(rReminders[i].Description);
+                            sbReminder.Append(" on ");
+                            sbReminder.Append(rReminders[i].Date);
+
+                            if (i != intRemindersLength - 1) sbReminder.Append(" and ");
                         }
 
                     }
 
                     // If sReminder has text in it, then email should be sent
-                    if (sReminder != "")
+                    if (sbReminder.Length > 0)
                     {
-                        em.Subject_ = "Reminder: " + sReminder;
-                        em.Body_ = $"Just a reminder that your {sReminder} on {sDate}!";
-                        em.SendEmail();
+                        em.Subject_ = "Reminder: ";
+                        em.Body_ = $"Just a reminder that your {sbReminder.ToString()}!";
+                        //em.SendEmail();
 
                         if (liMonthlyReminders != null)
                         {
