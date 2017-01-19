@@ -40,6 +40,7 @@ namespace Reminder
             FileHandler.WriteFile(strReminder);
         }
 
+        //TODO: Change the way email message is composed
         /// <summary>
         /// Checks the reminder file to see if there are any reminders within the time frame
         /// </summary>
