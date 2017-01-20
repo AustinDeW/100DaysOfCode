@@ -7,6 +7,7 @@ using System.Text;
 
 namespace Reminder
 {
+    //TODO: Implement texting
     public partial class Form1 : Form
     {
         EmailHandler em = null;
