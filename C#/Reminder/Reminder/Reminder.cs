@@ -9,6 +9,7 @@ namespace Reminder
     struct Reminder
     {
         public int[] ReminderPeriod;
+        public string RenewalUpdatePeriod;
         public string Date;
         public string Description;
     }

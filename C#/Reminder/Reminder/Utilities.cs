@@ -42,7 +42,14 @@ namespace Reminder
         /// <returns>Reminder's description</returns>
         public static string GetReminderDescriptionFromReminder(string sReminder)
         {
-            return sReminder.Substring(sReminder.LastIndexOf('-') + 1);
+            return sReminder.Contains("[") ? 
+                sReminder.Substring(sReminder.LastIndexOf('-') + 1, sReminder.LastIndexOf('[') - (sReminder.LastIndexOf('-') + 1)) :
+                sReminder.Substring(sReminder.LastIndexOf('-') + 1);
+        }
+
+        public static string GetRenewalUpdatePeriodFromReminder(string sReminder)
+        {   
+            return sReminder.Contains("[") ? sReminder.Substring(sReminder.LastIndexOf('[')) : "";
         }
 
         /// <summary>
@@ -63,6 +70,7 @@ namespace Reminder
                 }
                 else rReminders[i].ReminderPeriod = new int[2] { 1, 3 };
 
+                rReminders[i].RenewalUpdatePeriod = GetRenewalUpdatePeriodFromReminder(sReminders[i]);
                 rReminders[i].Date = GetDateFromReminder(sReminders[i]);
                 rReminders[i].Description = GetReminderDescriptionFromReminder(sReminders[i]);
             }

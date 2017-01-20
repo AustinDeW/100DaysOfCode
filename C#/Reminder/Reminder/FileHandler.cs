@@ -64,7 +64,7 @@ namespace Reminder
         }
 
 
-        //TODO: Specify update renewal period, such as Month or Year or Day
+        //TODO: Ready to use RenewalUpdatePeriod
         /// <summary>
         /// Updates a reminders date
         /// </summary>
@@ -75,7 +75,8 @@ namespace Reminder
             try
             {
                 Console.Write("\nStarted updating reminder file...");
-                for (int i = 0; i < rReminders.Length; i++)
+                int rRemindersLength = rReminders.Length;
+                for (int i = 0; i < rRemindersLength; i++)
                 {
                     for (int j = 0; j < liMonthlyReminders.Count; j++)
                     {
