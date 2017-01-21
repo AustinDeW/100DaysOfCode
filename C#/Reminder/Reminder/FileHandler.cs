@@ -63,8 +63,6 @@ namespace Reminder
             }
         }
 
-
-        //TODO: Ready to use RenewalUpdatePeriod
         /// <summary>
         /// Updates a reminders date
         /// </summary>
@@ -82,8 +80,25 @@ namespace Reminder
                     {
                         if (liMonthlyReminders[j] == rReminders[i].Description) // updates the reminders date
                         {
-                            DateTime dtNextMonth = Convert.ToDateTime(rReminders[i].Date).AddMonths(1);
-                            rReminders[i].Date = dtNextMonth.ToString(Utilities.DATE_FORMAT);
+                            DateTime newDate = new DateTime();
+                            string renewalUpdatePeriod = rReminders[i].RenewalUpdatePeriod.ToLower().Trim();
+                            if (renewalUpdatePeriod.Contains("m"))
+                            {
+                                int months = Convert.ToInt32(renewalUpdatePeriod.Substring(1, renewalUpdatePeriod.IndexOf('m') - 1));
+                                newDate = Convert.ToDateTime(rReminders[i].Date).AddMonths(months);
+                            }
+                            else if(renewalUpdatePeriod.Contains("d"))
+                            {
+                                int days = Convert.ToInt32(renewalUpdatePeriod.Substring(1, renewalUpdatePeriod.IndexOf('d') - 1));
+                                newDate = Convert.ToDateTime(rReminders[i].Date).AddDays(days);
+                            }
+                            else if(renewalUpdatePeriod.Contains("y"))
+                            {
+                                int years = Convert.ToInt32(renewalUpdatePeriod.Substring(1, renewalUpdatePeriod.IndexOf('y') - 1));
+                                newDate = Convert.ToDateTime(rReminders[i].Date).AddYears(years);
+                            }
+
+                            rReminders[i].Date = newDate.ToString(Utilities.DATE_FORMAT);
                         }
                     }
                 }

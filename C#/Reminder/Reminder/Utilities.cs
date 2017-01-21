@@ -110,6 +110,7 @@ namespace Reminder
                 sbReminder.Append(rReminders[i].Date);
                 sbReminder.Append("-");
                 sbReminder.Append(rReminders[i].Description);
+                sbReminder.Append(rReminders[i].RenewalUpdatePeriod);
                 sbReminder.Append(Environment.NewLine);
             }
 

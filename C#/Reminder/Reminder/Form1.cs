@@ -8,6 +8,7 @@ using System.Text;
 namespace Reminder
 {
     //TODO: Implement texting
+    //TODO: Update GUI
     public partial class Form1 : Form
     {
         EmailHandler em = null;
