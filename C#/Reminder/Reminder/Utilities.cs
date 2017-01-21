@@ -46,7 +46,12 @@ namespace Reminder
                 sReminder.Substring(sReminder.LastIndexOf('-') + 1, sReminder.LastIndexOf('[') - (sReminder.LastIndexOf('-') + 1)) :
                 sReminder.Substring(sReminder.LastIndexOf('-') + 1);
         }
-
+        
+        /// <summary>
+        /// Gets the Renewal Update Period from a reminder string
+        /// </summary>
+        /// <param name="sReminder">Reminder string to parse update period from</param>
+        /// <returns>Reminder's Renewal Update Period</returns>
         public static string GetRenewalUpdatePeriodFromReminder(string sReminder)
         {   
             return sReminder.Contains("[") ? sReminder.Substring(sReminder.LastIndexOf('[')) : "";
