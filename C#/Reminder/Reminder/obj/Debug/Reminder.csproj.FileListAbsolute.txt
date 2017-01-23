@@ -28,3 +28,6 @@ C:\Users\austi\Documents\GitHub\C#\Reminder\Reminder\obj\Debug\Reminder.csproj.G
 C:\Users\austin.dewitt\Documents\GitHub\100DaysOfCode\C#\Reminder\Reminder\bin\Debug\Reminder.exe.config
 C:\Users\austin.dewitt\Documents\GitHub\100DaysOfCode\C#\Reminder\Reminder\obj\Debug\Reminder.exe
 C:\Users\austin.dewitt\Documents\GitHub\100DaysOfCode\C#\Reminder\Reminder\obj\Debug\Reminder.pdb
+C:\Users\Austin\Documents\GitHub\C#\Reminder\Reminder\bin\Debug\Reminder.exe.config
+C:\Users\Austin\Documents\GitHub\C#\Reminder\Reminder\obj\Debug\Reminder.exe
+C:\Users\Austin\Documents\GitHub\C#\Reminder\Reminder\obj\Debug\Reminder.pdb
