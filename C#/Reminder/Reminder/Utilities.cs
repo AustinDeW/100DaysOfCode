@@ -65,7 +65,10 @@ namespace Reminder
         /// <returns>Reminder's Reminder Period(s)</returns>
         public static string[] GetReminderPeriod(string sReminder)
         {
-            return sReminder.Substring(sReminder.IndexOf('('), sReminder.IndexOf(')')).Replace("(", "").Replace(")", "").Split(','); 
+            return sReminder.Substring(sReminder.IndexOf('('), sReminder.IndexOf(')') - sReminder.IndexOf('('))
+                   .Replace("(", "")
+                   .Replace(")", "")
+                   .Split(','); 
         }
 
         public static string GetContactPreference(string sReminder)
