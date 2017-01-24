@@ -57,6 +57,22 @@ namespace Reminder
             return sReminder.Contains("[") ? sReminder.Substring(sReminder.LastIndexOf('[')) : "";
         }
 
+        //TODO: String isn't being parsed correctly
+        /// <summary>
+        /// Gets the Reminder Period that the user wants to reminded
+        /// </summary>
+        /// <param name="sReminder">Reminder string to parse reminder period from</param>
+        /// <returns>Reminder's Reminder Period(s)</returns>
+        public static string[] GetReminderPeriod(string sReminder)
+        {
+            return sReminder.Substring(sReminder.IndexOf('('), sReminder.IndexOf(')')).Replace("(", "").Replace(")", "").Split(','); 
+        }
+
+        public static string GetContactPreference(string sReminder)
+        {
+            return sReminder.Substring(sReminder.IndexOf('{'), sReminder.IndexOf('}'));
+        }
+
         /// <summary>
         /// Creates Reminder objects from an array of strings
         /// </summary>
@@ -67,13 +83,11 @@ namespace Reminder
             Reminder[] rReminders = new Reminder[sReminders.Length];
             for(int i = 0; i < sReminders.Length; i++)
             {
+                // Checks for contact preference, ie. Email/Text/Both
+                rReminders[i].ContactPreference = sReminders[i].Contains("{") ? GetContactPreference(sReminders[i]) : "Email";
+
                 // Checks for custom reminder period
-                if (sReminders[i].StartsWith("("))
-                {
-                    string[] sRenewalPeriod = sReminders[i].Substring(0, sReminders[i].IndexOf(')') + 1).Replace("(", "").Replace(")", "").Split(',');
-                    rReminders[i].ReminderPeriod = Array.ConvertAll(sRenewalPeriod, int.Parse);
-                }
-                else rReminders[i].ReminderPeriod = new int[2] { 1, 3 };
+                rReminders[i].ReminderPeriod = sReminders[i].Contains("(") ? Array.ConvertAll(GetReminderPeriod(sReminders[i]), int.Parse) : new int[2] { 1, 3 }; ;
 
                 rReminders[i].RenewalUpdatePeriod = GetRenewalUpdatePeriodFromReminder(sReminders[i]);
                 rReminders[i].Date = GetDateFromReminder(sReminders[i]);
