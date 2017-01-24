@@ -70,7 +70,7 @@ namespace Reminder
             try
             {
                 // You can hardcode email's password here
-                pw = FileHandler.ReadFile(ConfigurationManager.AppSettings["FromEmailLoginPWFileLocation"])[0];
+                pw = FileHandler.ReadFile(ConfigurationManager.AppSettings["ReminderDataFileLocation"] + "Other.txt")[0];
             }
             catch(Exception ex)
             {
@@ -105,7 +105,7 @@ namespace Reminder
                 mailClient.Send(message);
             }
 
-            Console.WriteLine("done sending email.");
+            Console.WriteLine("done.");
         }
 
         /// <summary>

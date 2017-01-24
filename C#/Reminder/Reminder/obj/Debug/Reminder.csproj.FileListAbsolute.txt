@@ -31,3 +31,14 @@ C:\Users\austin.dewitt\Documents\GitHub\100DaysOfCode\C#\Reminder\Reminder\obj\D
 C:\Users\Austin\Documents\GitHub\C#\Reminder\Reminder\bin\Debug\Reminder.exe.config
 C:\Users\Austin\Documents\GitHub\C#\Reminder\Reminder\obj\Debug\Reminder.exe
 C:\Users\Austin\Documents\GitHub\C#\Reminder\Reminder\obj\Debug\Reminder.pdb
+C:\Users\Austin\Documents\GitHub\C#\Reminder\Reminder\bin\Debug\Reminder.exe
+C:\Users\Austin\Documents\GitHub\C#\Reminder\Reminder\bin\Debug\Reminder.pdb
+C:\Users\Austin\Documents\GitHub\C#\Reminder\Reminder\bin\Debug\RestSharp.dll
+C:\Users\Austin\Documents\GitHub\C#\Reminder\Reminder\bin\Debug\Twilio.Api.dll
+C:\Users\Austin\Documents\GitHub\C#\Reminder\Reminder\bin\Debug\RestSharp.xml
+C:\Users\Austin\Documents\GitHub\C#\Reminder\Reminder\bin\Debug\Twilio.Api.pdb
+C:\Users\Austin\Documents\GitHub\C#\Reminder\Reminder\bin\Debug\Twilio.Api.xml
+C:\Users\Austin\Documents\GitHub\C#\Reminder\Reminder\obj\Debug\Reminder.csprojResolveAssemblyReference.cache
+C:\Users\Austin\Documents\GitHub\C#\Reminder\Reminder\obj\Debug\Reminder.Form1.resources
+C:\Users\Austin\Documents\GitHub\C#\Reminder\Reminder\obj\Debug\Reminder.Properties.Resources.resources
+C:\Users\Austin\Documents\GitHub\C#\Reminder\Reminder\obj\Debug\Reminder.csproj.GenerateResource.Cache
