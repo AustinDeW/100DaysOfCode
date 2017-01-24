@@ -57,7 +57,7 @@ namespace Reminder
             return sReminder.Contains("[") ? sReminder.Substring(sReminder.LastIndexOf('[')) : "";
         }
 
-        //TODO: String isn't being parsed correctly
+        //TODO: **DONE NEEDS TESTING** String isn't being parsed correctly
         /// <summary>
         /// Gets the Reminder Period that the user wants to reminded
         /// </summary>
