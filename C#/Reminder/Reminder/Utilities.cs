@@ -111,8 +111,11 @@ namespace Reminder
 
             for(int i = 0; i < rReminders.Length; i++)
             {
-                int inReminderPeriodLength = rReminders[i].ReminderPeriod.Length;
+                sbReminder.Append("{");
+                sbReminder.Append(rReminders[i].ContactPreference);
+                sbReminder.Append("}");
                 sbReminder.Append("(");
+                int inReminderPeriodLength = rReminders[i].ReminderPeriod.Length;
                 for(int j = 0; j < inReminderPeriodLength; j++)
                 {
                     sbReminder.Append(rReminders[i].ReminderPeriod[j]);

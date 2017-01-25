@@ -77,7 +77,6 @@ namespace Reminder
                                 sbEmailReminder.Append(Utilities.AppendReminder(rReminders[i]));
                             }
                         }
-
                     }
 
                     //TODO: Find a way to refactor this code
