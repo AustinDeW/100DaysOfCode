@@ -78,6 +78,14 @@ namespace Reminder
             }
         }
 
+        public static void SendEmail(string subject, string body)
+        {
+            EmailHandler em = new EmailHandler();
+            em.Subject_ = subject;
+            em.Body_ = body;
+            em.SendEmail();
+        }
+
         /// <summary>
         /// Sends an email
         /// </summary>

@@ -7,25 +7,15 @@ using System.Text;
 
 namespace Reminder
 {
-    //TODO: Implement texting
     //TODO: Update GUI
     public partial class Form1 : Form
     {
-        EmailHandler em = null;
         int exitTime = 5; // time that application will auto exit
         public Form1()
         {
             InitializeComponent();
             tbReminderName.KeyDown += (sender, e) => KeyDown_SubmitReminder(sender, e); // Allows 'enter' key to submit 
-
-            try { em = new EmailHandler(); }
-            catch (Exception ex)
-            {
-                Console.WriteLine("\n\n" + ex.Message + "\n\n" + ex.StackTrace);
-                EmailHandler.SendErrorEmail(ex);
-            }
-
-
+                        
             CheckForReminder();
         }
 
@@ -55,7 +45,8 @@ namespace Reminder
                 {
                     List<string> liMonthlyReminders = new List<string>(); // List that contains reminders that need to have date updated
                     Reminder[] rReminders = Utilities.StringArrToReminderArr(FileHandler.ReadFile());// All of the reminders from the reminder file
-                    StringBuilder sbReminder = new StringBuilder();
+                    StringBuilder sbEmailReminder = new StringBuilder();
+                    StringBuilder sbTextReminder = new StringBuilder();
 
                     int intRemindersLength = rReminders.Length;
                     for (int i = 0; i < intRemindersLength; ++i)
@@ -70,28 +61,60 @@ namespace Reminder
                                 liMonthlyReminders.Add(rReminders[i].Description);
                             }
 
+                            //TODO: Find a way to refactor this code
                             // Concatenates so that I can store all reminders and dates in one string
-                            // so all reminders can be sent in one email
-                            sbReminder.Append(rReminders[i].Description);
-                            sbReminder.Append(" on ");
-                            sbReminder.Append(rReminders[i].Date);
+                            // so all reminders can be sent in one email or text                            
+                            if(rReminders[i].ContactPreference.ToLower().Contains("text"))
+                            {
+                                sbTextReminder.Append(rReminders[i].Description);
+                                sbTextReminder.Append(" on ");
+                                sbTextReminder.Append(rReminders[i].Date);
+                                if (i != intRemindersLength - 1) sbTextReminder.Append(" and ");
+                            }
+                            else if(rReminders[i].ContactPreference.ToLower().Contains("both"))
+                            {
+                                sbEmailReminder.Append(rReminders[i].Description);
+                                sbEmailReminder.Append(" on ");
+                                sbEmailReminder.Append(rReminders[i].Date);
+                                if (i != intRemindersLength - 1) sbEmailReminder.Append(" and ");
 
-                            if (i != intRemindersLength - 1) sbReminder.Append(" and ");
+                                sbTextReminder.Append(rReminders[i].Description);
+                                sbTextReminder.Append(" on ");
+                                sbTextReminder.Append(rReminders[i].Date);
+                                if (i != intRemindersLength - 1) sbTextReminder.Append(" and ");
+                            }
+                            else
+                            {
+                                sbEmailReminder.Append(rReminders[i].Description);
+                                sbEmailReminder.Append(" on ");
+                                sbEmailReminder.Append(rReminders[i].Date);
+                                if (i != intRemindersLength - 1) sbEmailReminder.Append(" and ");
+                            }
                         }
 
                     }
 
-                    // If sReminder has text in it, then email should be sent
-                    if (sbReminder.Length > 0)
+                    //TODO: Find a way to refactor this code
+                    if(sbEmailReminder.Length > 0 && sbTextReminder.Length > 0)
                     {
-                        em.Subject_ = "Reminder: ";
-                        em.Body_ = $"Just a reminder that your {sbReminder.ToString()}!";
-                        //em.SendEmail();
+                        EmailHandler.SendEmail("Reminder: ", $"Just a reminder that your {sbEmailReminder.ToString()}!");
+                        TextMessageHandler txtm = new TextMessageHandler();
+                        txtm.SendTextMessage($"Reminder: Just a reminder that your {sbTextReminder.ToString()}!");
+                    }
+                    else if(sbTextReminder.Length > 0)
+                    {
+                        TextMessageHandler txtm = new TextMessageHandler();
+                        txtm.SendTextMessage($"Reminder: Just a reminder that your {sbTextReminder.ToString()}!");
+                    }
+                    else
+                    {
+                        EmailHandler.SendEmail("Reminder: ", $"Just a reminder that your {sbEmailReminder.ToString()}!");
+                    }
 
-                        if (liMonthlyReminders != null)
-                        {
-                            FileHandler.UpdateRenewalDate(liMonthlyReminders, rReminders);
-                        }
+                    // If sReminder has text in it, then email should be sent
+                    if (liMonthlyReminders != null || liMonthlyReminders.Count > 0)
+                    {
+                        FileHandler.UpdateRenewalDate(liMonthlyReminders, rReminders);
                     }
                 }
             }
