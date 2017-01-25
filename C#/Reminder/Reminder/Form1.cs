@@ -61,34 +61,20 @@ namespace Reminder
                                 liMonthlyReminders.Add(rReminders[i].Description);
                             }
 
-                            //TODO: Find a way to refactor this code
                             // Concatenates so that I can store all reminders and dates in one string
                             // so all reminders can be sent in one email or text                            
                             if(rReminders[i].ContactPreference.ToLower().Contains("text"))
                             {
-                                sbTextReminder.Append(rReminders[i].Description);
-                                sbTextReminder.Append(" on ");
-                                sbTextReminder.Append(rReminders[i].Date);
-                                if (i != intRemindersLength - 1) sbTextReminder.Append(" and ");
+                                sbTextReminder.Append(Utilities.AppendReminder(rReminders[i]));
                             }
                             else if(rReminders[i].ContactPreference.ToLower().Contains("both"))
                             {
-                                sbEmailReminder.Append(rReminders[i].Description);
-                                sbEmailReminder.Append(" on ");
-                                sbEmailReminder.Append(rReminders[i].Date);
-                                if (i != intRemindersLength - 1) sbEmailReminder.Append(" and ");
-
-                                sbTextReminder.Append(rReminders[i].Description);
-                                sbTextReminder.Append(" on ");
-                                sbTextReminder.Append(rReminders[i].Date);
-                                if (i != intRemindersLength - 1) sbTextReminder.Append(" and ");
+                                sbTextReminder.Append(Utilities.AppendReminder(rReminders[i]));
+                                sbEmailReminder.Append(Utilities.AppendReminder(rReminders[i]));
                             }
                             else
                             {
-                                sbEmailReminder.Append(rReminders[i].Description);
-                                sbEmailReminder.Append(" on ");
-                                sbEmailReminder.Append(rReminders[i].Date);
-                                if (i != intRemindersLength - 1) sbEmailReminder.Append(" and ");
+                                sbEmailReminder.Append(Utilities.AppendReminder(rReminders[i]));
                             }
                         }
 

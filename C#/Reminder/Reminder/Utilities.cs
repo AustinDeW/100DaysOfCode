@@ -133,5 +133,10 @@ namespace Reminder
 
             return sbReminder.ToString();
         }
+
+        public static string AppendReminder(Reminder rReminder)
+        {
+            return rReminder.Description + " on " + rReminder.Date + Environment.NewLine;
+        }
     }
 }
