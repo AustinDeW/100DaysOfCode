@@ -79,7 +79,6 @@ namespace Reminder
                         }
                     }
 
-                    //TODO: Find a way to refactor this code
                     if(sbEmailReminder.Length > 0 && sbTextReminder.Length > 0)
                     {
                         EmailHandler.SendEmail("Reminder: ", $"Just a reminder that your {sbEmailReminder.ToString()}!");
@@ -91,13 +90,13 @@ namespace Reminder
                         TextMessageHandler txtm = new TextMessageHandler();
                         txtm.SendTextMessage($"Reminder: Just a reminder that your {sbTextReminder.ToString()}!");
                     }
-                    else
+                    else if(sbEmailReminder.Length > 0)
                     {
                         EmailHandler.SendEmail("Reminder: ", $"Just a reminder that your {sbEmailReminder.ToString()}!");
                     }
 
                     // If sReminder has text in it, then email should be sent
-                    if (liMonthlyReminders != null || liMonthlyReminders.Count > 0)
+                    if (liMonthlyReminders.Count > 0)
                     {
                         FileHandler.UpdateRenewalDate(liMonthlyReminders, rReminders);
                     }

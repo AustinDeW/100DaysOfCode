@@ -101,13 +101,14 @@ namespace Reminder
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 UseDefaultCredentials = false,
                 Credentials = new NetworkCredential(from.Address, pw),
-                Timeout = 20000
+                Timeout = 20000,
             };
 
             using (var message = new MailMessage(from, to)
             {
                 Subject = Subject_,
-                Body = Body_
+                Body = Body_,
+                IsBodyHtml = true
             })
             {
                 mailClient.Send(message);

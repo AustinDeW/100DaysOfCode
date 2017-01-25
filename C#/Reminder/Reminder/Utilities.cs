@@ -55,7 +55,6 @@ namespace Reminder
             return sReminder.Contains("[") ? sReminder.Substring(sReminder.LastIndexOf('[')) : "";
         }
 
-        //TODO: **DONE NEEDS TESTING** String isn't being parsed correctly
         /// <summary>
         /// Gets the Reminder Period that the user wants to reminded
         /// </summary>
@@ -69,9 +68,14 @@ namespace Reminder
                    .Split(','); 
         }
 
+        /// <summary>
+        /// Gets the Contact Preference from a reminder
+        /// </summary>
+        /// <param name="sReminder">Reminder string to parse contact preference from</param>
+        /// <returns>Reminder's contact preference ie. Text/Email/Both</returns>
         public static string GetContactPreference(string sReminder)
         {
-            return sReminder.Substring(sReminder.IndexOf('{'), sReminder.IndexOf('}'));
+            return sReminder.Substring(sReminder.IndexOf('{'), sReminder.IndexOf('}') + 1);
         }
 
         /// <summary>
@@ -109,9 +113,7 @@ namespace Reminder
 
             for(int i = 0; i < rReminders.Length; i++)
             {
-                sbReminder.Append("{");
                 sbReminder.Append(rReminders[i].ContactPreference);
-                sbReminder.Append("}");
                 sbReminder.Append("(");
                 int inReminderPeriodLength = rReminders[i].ReminderPeriod.Length;
                 for(int j = 0; j < inReminderPeriodLength; j++)
@@ -135,9 +137,10 @@ namespace Reminder
             return sbReminder.ToString();
         }
 
+        //TODO: Create function to send HTML email
         public static string AppendReminder(Reminder rReminder)
         {
-            return rReminder.Description + " on " + rReminder.Date + Environment.NewLine;
+            return Environment.NewLine + rReminder.Description + " on " + rReminder.Date;
         }
     }
 }
