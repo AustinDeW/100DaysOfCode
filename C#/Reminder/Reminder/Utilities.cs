@@ -92,7 +92,7 @@ namespace Reminder
                 rReminders[i].ContactPreference = sReminders[i].Contains("{") ? GetContactPreference(sReminders[i]) : "Email";
 
                 // Checks for custom reminder period
-                rReminders[i].ReminderPeriod = sReminders[i].Contains("(") ? Array.ConvertAll(GetReminderPeriod(sReminders[i]), int.Parse) : new int[2] { 1, 3 }; ;
+                rReminders[i].ReminderPeriod = sReminders[i].Contains("(") ? Array.ConvertAll(GetReminderPeriod(sReminders[i]), int.Parse) : new int[1] { 1 }; ;
 
                 rReminders[i].RenewalUpdatePeriod = GetRenewalUpdatePeriodFromReminder(sReminders[i]);
                 rReminders[i].Date = GetDateFromReminder(sReminders[i]);
