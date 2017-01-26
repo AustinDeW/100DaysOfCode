@@ -16,7 +16,7 @@ namespace Reminder
             InitializeComponent();
 
             // Handles key press events on form
-            this.KeyPreview = true;
+            this.KeyPreview = true; 
             this.KeyPress += (sender, e) => KeyPress_EventHandler(sender, e);    
                    
             //CheckForReminder();
