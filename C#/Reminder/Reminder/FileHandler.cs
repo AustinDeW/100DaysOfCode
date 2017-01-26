@@ -81,7 +81,7 @@ namespace Reminder
                         if (liMonthlyReminders[j] == rReminders[i].Description) // updates the reminders date
                         {
                             DateTime newDate = new DateTime();
-                            string renewalUpdatePeriod = rReminders[i].RenewalUpdatePeriod.ToLower().Trim();
+                            string renewalUpdatePeriod = rReminders[i].ReminderUpdatePeriod.ToLower().Trim();
                             if (renewalUpdatePeriod.Contains("m"))
                             {
                                 int months = Convert.ToInt32(renewalUpdatePeriod.Substring(1, renewalUpdatePeriod.IndexOf('m') - 1));
