@@ -7,7 +7,6 @@ using System.Text;
 
 namespace Reminder
 {
-    //TODO: Update GUI
     public partial class Form1 : Form
     {
         int exitTime = 5; // time that application will auto exit
@@ -19,7 +18,6 @@ namespace Reminder
             this.KeyPreview = true; 
             this.KeyPress += (sender, e) => KeyPress_EventHandler(sender, e);    
                    
-            //work!!
             //CheckForReminder();
         }
 
