@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.tbReminderName = new System.Windows.Forms.TextBox();
-            this.dtpRenewalDate = new System.Windows.Forms.DateTimePicker();
-            this.label1 = new System.Windows.Forms.Label();
+            this.tbReminderDescription = new System.Windows.Forms.TextBox();
+            this.dtpReminderDate = new System.Windows.Forms.DateTimePicker();
+            this.lblReminderDescription = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnAddReminder = new System.Windows.Forms.Button();
             this.timerExit = new System.Windows.Forms.Timer(this.components);
@@ -45,49 +45,51 @@
             this.tltpReminderPeriods = new System.Windows.Forms.ToolTip(this.components);
             this.lblReminderUpdatePeriod = new System.Windows.Forms.Label();
             this.tbReminderUpdatePeriod = new System.Windows.Forms.TextBox();
+            this.lblReminderUpdatePeriodHelp = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.gbxContactPreferences.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tbReminderName
+            // tbReminderDescription
             // 
-            this.tbReminderName.Location = new System.Drawing.Point(206, 70);
-            this.tbReminderName.Name = "tbReminderName";
-            this.tbReminderName.Size = new System.Drawing.Size(200, 22);
-            this.tbReminderName.TabIndex = 0;
+            this.tbReminderDescription.Location = new System.Drawing.Point(206, 70);
+            this.tbReminderDescription.Name = "tbReminderDescription";
+            this.tbReminderDescription.Size = new System.Drawing.Size(200, 22);
+            this.tbReminderDescription.TabIndex = 0;
             // 
-            // dtpRenewalDate
+            // dtpReminderDate
             // 
-            this.dtpRenewalDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpRenewalDate.Location = new System.Drawing.Point(206, 98);
-            this.dtpRenewalDate.Name = "dtpRenewalDate";
-            this.dtpRenewalDate.Size = new System.Drawing.Size(200, 22);
-            this.dtpRenewalDate.TabIndex = 1;
-            this.dtpRenewalDate.Value = new System.DateTime(2016, 12, 9, 12, 14, 14, 0);
+            this.dtpReminderDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpReminderDate.Location = new System.Drawing.Point(206, 98);
+            this.dtpReminderDate.Name = "dtpReminderDate";
+            this.dtpReminderDate.Size = new System.Drawing.Size(200, 22);
+            this.dtpReminderDate.TabIndex = 1;
+            this.dtpReminderDate.Value = new System.DateTime(2017, 1, 26, 13, 4, 22, 927);
             // 
-            // label1
+            // lblReminderDescription
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(127, 73);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 17);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Reminder:";
+            this.lblReminderDescription.AutoSize = true;
+            this.lblReminderDescription.Location = new System.Drawing.Point(52, 73);
+            this.lblReminderDescription.Name = "lblReminderDescription";
+            this.lblReminderDescription.Size = new System.Drawing.Size(148, 17);
+            this.lblReminderDescription.TabIndex = 2;
+            this.lblReminderDescription.Text = "Reminder Description:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(100, 103);
+            this.label2.Location = new System.Drawing.Point(93, 103);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(100, 17);
+            this.label2.Size = new System.Drawing.Size(107, 17);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Renewal Date:";
+            this.label2.Text = "Reminder Date:";
             // 
             // btnAddReminder
             // 
-            this.btnAddReminder.Location = new System.Drawing.Point(292, 349);
+            this.btnAddReminder.Location = new System.Drawing.Point(292, 369);
             this.btnAddReminder.Name = "btnAddReminder";
             this.btnAddReminder.Size = new System.Drawing.Size(114, 30);
-            this.btnAddReminder.TabIndex = 4;
+            this.btnAddReminder.TabIndex = 6;
             this.btnAddReminder.Text = "Add Reminder";
             this.btnAddReminder.UseVisualStyleBackColor = true;
             this.btnAddReminder.Click += new System.EventHandler(this.btnAddReminder_Click);
@@ -100,11 +102,11 @@
             // cbStopExit
             // 
             this.cbStopExit.AutoSize = true;
-            this.cbStopExit.Location = new System.Drawing.Point(35, 274);
+            this.cbStopExit.Location = new System.Drawing.Point(12, 408);
             this.cbStopExit.Name = "cbStopExit";
-            this.cbStopExit.Size = new System.Drawing.Size(148, 21);
-            this.cbStopExit.TabIndex = 5;
-            this.cbStopExit.Text = "Stop Auto Exit (F1)";
+            this.cbStopExit.Size = new System.Drawing.Size(185, 21);
+            this.cbStopExit.TabIndex = 7;
+            this.cbStopExit.Text = "Stop Auto Exit ( Ctrl + q )";
             this.cbStopExit.UseVisualStyleBackColor = true;
             this.cbStopExit.CheckedChanged += new System.EventHandler(this.cbStopExit_CheckedChanged);
             // 
@@ -112,7 +114,7 @@
             // 
             this.gbxContactPreferences.Controls.Add(this.cbTexting);
             this.gbxContactPreferences.Controls.Add(this.cbEmail);
-            this.gbxContactPreferences.Location = new System.Drawing.Point(206, 238);
+            this.gbxContactPreferences.Location = new System.Drawing.Point(206, 258);
             this.gbxContactPreferences.Name = "gbxContactPreferences";
             this.gbxContactPreferences.Size = new System.Drawing.Size(200, 84);
             this.gbxContactPreferences.TabIndex = 6;
@@ -125,7 +127,7 @@
             this.cbTexting.Location = new System.Drawing.Point(22, 36);
             this.cbTexting.Name = "cbTexting";
             this.cbTexting.Size = new System.Drawing.Size(57, 21);
-            this.cbTexting.TabIndex = 1;
+            this.cbTexting.TabIndex = 4;
             this.cbTexting.Text = "Text";
             this.cbTexting.UseVisualStyleBackColor = true;
             // 
@@ -135,7 +137,7 @@
             this.cbEmail.Location = new System.Drawing.Point(114, 36);
             this.cbEmail.Name = "cbEmail";
             this.cbEmail.Size = new System.Drawing.Size(64, 21);
-            this.cbEmail.TabIndex = 0;
+            this.cbEmail.TabIndex = 5;
             this.cbEmail.Text = "Email";
             this.cbEmail.UseVisualStyleBackColor = true;
             // 
@@ -155,13 +157,14 @@
             this.tbReminderPeriods.Location = new System.Drawing.Point(206, 126);
             this.tbReminderPeriods.Name = "tbReminderPeriods";
             this.tbReminderPeriods.Size = new System.Drawing.Size(200, 22);
-            this.tbReminderPeriods.TabIndex = 7;
+            this.tbReminderPeriods.TabIndex = 2;
             this.tltpReminderPeriods.SetToolTip(this.tbReminderPeriods, "This specifies how many days, before the due date, that you want a reminder to be" +
         " sent to you.\r\n");
             // 
             // lblReminderPeriodTip
             // 
             this.lblReminderPeriodTip.AutoSize = true;
+            this.lblReminderPeriodTip.ForeColor = System.Drawing.Color.Red;
             this.lblReminderPeriodTip.Location = new System.Drawing.Point(136, 151);
             this.lblReminderPeriodTip.Name = "lblReminderPeriodTip";
             this.lblReminderPeriodTip.Size = new System.Drawing.Size(324, 17);
@@ -182,13 +185,35 @@
             this.tbReminderUpdatePeriod.Location = new System.Drawing.Point(206, 186);
             this.tbReminderUpdatePeriod.Name = "tbReminderUpdatePeriod";
             this.tbReminderUpdatePeriod.Size = new System.Drawing.Size(200, 22);
-            this.tbReminderUpdatePeriod.TabIndex = 10;
+            this.tbReminderUpdatePeriod.TabIndex = 3;
+            // 
+            // lblReminderUpdatePeriodHelp
+            // 
+            this.lblReminderUpdatePeriodHelp.AutoSize = true;
+            this.lblReminderUpdatePeriodHelp.ForeColor = System.Drawing.Color.Red;
+            this.lblReminderUpdatePeriodHelp.Location = new System.Drawing.Point(94, 211);
+            this.lblReminderUpdatePeriodHelp.Name = "lblReminderUpdatePeriodHelp";
+            this.lblReminderUpdatePeriodHelp.Size = new System.Drawing.Size(405, 17);
+            this.lblReminderUpdatePeriodHelp.TabIndex = 12;
+            this.lblReminderUpdatePeriodHelp.Text = "( Specify every month or day or year. e.g. 1 month or 23 days )";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.Red;
+            this.label1.Location = new System.Drawing.Point(171, 228);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(269, 17);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "( Leave blank if it is a one time reminder )";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(511, 441);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblReminderUpdatePeriodHelp);
             this.Controls.Add(this.lblReminderUpdatePeriod);
             this.Controls.Add(this.tbReminderUpdatePeriod);
             this.Controls.Add(this.lblReminderPeriodTip);
@@ -198,9 +223,9 @@
             this.Controls.Add(this.cbStopExit);
             this.Controls.Add(this.btnAddReminder);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.dtpRenewalDate);
-            this.Controls.Add(this.tbReminderName);
+            this.Controls.Add(this.lblReminderDescription);
+            this.Controls.Add(this.dtpReminderDate);
+            this.Controls.Add(this.tbReminderDescription);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reminders";
@@ -213,9 +238,9 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox tbReminderName;
-        private System.Windows.Forms.DateTimePicker dtpRenewalDate;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox tbReminderDescription;
+        private System.Windows.Forms.DateTimePicker dtpReminderDate;
+        private System.Windows.Forms.Label lblReminderDescription;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnAddReminder;
         private System.Windows.Forms.Timer timerExit;
@@ -229,6 +254,8 @@
         private System.Windows.Forms.Label lblReminderPeriodTip;
         private System.Windows.Forms.Label lblReminderUpdatePeriod;
         private System.Windows.Forms.TextBox tbReminderUpdatePeriod;
+        private System.Windows.Forms.Label lblReminderUpdatePeriodHelp;
+        private System.Windows.Forms.Label label1;
     }
 }
 
