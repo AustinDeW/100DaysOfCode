@@ -137,10 +137,18 @@ namespace Reminder
             return sbReminder.ToString();
         }
 
-        //TODO: Create function to send HTML email
         public static string AppendReminder(Reminder rReminder)
         {
             return Environment.NewLine + rReminder.Description + " on " + rReminder.Date;
+        }
+
+        public static string AppendReminderHTML(Reminder rReminder)
+        {
+            return Environment.NewLine + 
+                   rReminder.Description + 
+                   " on <span style=\"color: red; font-weight: bold\"" + 
+                   rReminder.Date + 
+                   "</span>";
         }
     }
 }

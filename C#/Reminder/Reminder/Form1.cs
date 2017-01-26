@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Reminder
 {
-    //TODO: Update GUI
+    //TODO: Update GUI - Wire components up to code
     public partial class Form1 : Form
     {
         int exitTime = 5; // time that application will auto exit
@@ -70,11 +70,11 @@ namespace Reminder
                             else if(rReminders[i].ContactPreference.ToLower().Contains("both"))
                             {
                                 sbTextReminder.Append(Utilities.AppendReminder(rReminders[i]));
-                                sbEmailReminder.Append(Utilities.AppendReminder(rReminders[i]));
+                                sbEmailReminder.Append(Utilities.AppendReminderHTML(rReminders[i]));
                             }
                             else
                             {
-                                sbEmailReminder.Append(Utilities.AppendReminder(rReminders[i]));
+                                sbEmailReminder.Append(Utilities.AppendReminderHTML(rReminders[i]));
                             }
                         }
                     }
