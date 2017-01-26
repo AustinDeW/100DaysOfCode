@@ -18,6 +18,7 @@ namespace Reminder
             this.KeyPreview = true; 
             this.KeyPress += (sender, e) => KeyPress_EventHandler(sender, e);    
                    
+            //work!!
             //CheckForReminder();
         }
 
