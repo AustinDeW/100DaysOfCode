@@ -3,8 +3,8 @@
     struct Reminder
     {
         public string ContactPreference;
-        public int[] ReminderPeriod;
-        public string RenewalUpdatePeriod;
+        public int[] ReminderPeriods;
+        public string ReminderUpdatePeriod;
         public string Date;
         public string Description;
     }

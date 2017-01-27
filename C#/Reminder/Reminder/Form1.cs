@@ -7,16 +7,18 @@ using System.Text;
 
 namespace Reminder
 {
-    //TODO: Update GUI
     public partial class Form1 : Form
     {
         int exitTime = 5; // time that application will auto exit
         public Form1()
         {
             InitializeComponent();
-            tbReminderName.KeyDown += (sender, e) => KeyDown_SubmitReminder(sender, e); // Allows 'enter' key to submit 
-                        
-            CheckForReminder();
+
+            // Handles key press events on form
+            this.KeyPreview = true; 
+            this.KeyPress += (sender, e) => KeyPress_EventHandler(sender, e);    
+
+            //CheckForReminder();
         }
 
         /// <summary>
@@ -26,12 +28,48 @@ namespace Reminder
         /// <param name="e"></param>
         private void btnAddReminder_Click(object sender, EventArgs e)
         {
-            string reminderName = tbReminderName.Text;
-            string renewalDate = dtpRenewalDate.Text;
+            Reminder[] rReminders = new Reminder[1];
+            bool isValid = true;
+            string sErrorMessage = "";
 
-            string strReminder = renewalDate + "-" + reminderName + Environment.NewLine;
-            Console.WriteLine($"Reminder added : {strReminder}\n\n");
-            FileHandler.WriteFile(strReminder);
+            if(!Utilities.VerifyReminderDescription(tbReminderDescription.Text, out rReminders[0].Description))
+            {
+                sErrorMessage += "\nError: Description length has to be at least 1 character long!\n\n";
+                isValid = false;
+            }
+            if(!Utilities.VerifyReminderDate(dtpReminderDate.Text, out rReminders[0].Date))
+            {
+                sErrorMessage += "\nError: Date has to be later than today's date!\n\n";
+                isValid = false;
+            }
+            if(!Utilities.VerifyReminderPeriods(tbReminderPeriods.Text.Split(','), out rReminders[0].ReminderPeriods))
+            {
+                sErrorMessage += "\nError: Reminder Periods have to be numeric!\nExample: 1,3,5 or 2,4 or 1\n\n";
+                isValid = false;
+            }
+            if (!Utilities.VerifyReminderUpdatePeriod(tbReminderUpdatePeriod.Text.ToLower(), out rReminders[0].ReminderUpdatePeriod))
+            {
+                sErrorMessage += "\nError: Update Period should specify whether or not you want to update the reminder's date regularly!\n" +
+                                 "Leave blank, if it is just a one time reminder!\n" +
+                                 "Example: 1 month or 23 days or 2 years\n\n";
+                isValid = false;
+            }
+            else rReminders[0].Description += "*";
+            if(!Utilities.VerifyContactPreferences(cbTexting.Checked, cbEmail.Checked, out rReminders[0].ContactPreference))
+            {
+                sErrorMessage += "\nError: Please check at least one of the Contact Preferences checkboxes!\n\n";
+                isValid = false;
+            }
+
+            if(isValid)
+            {
+                Console.WriteLine($"Reminder added : {rReminders[0].Description}\n\n");
+                FileHandler.WriteFile(Utilities.ReminderArrToString(rReminders));
+            }
+            else
+            {
+                MessageBox.Show(sErrorMessage, "Errors");
+            }
         }
 
         /// <summary>
@@ -54,7 +92,7 @@ namespace Reminder
                         DateTime dtReminderDate = Convert.ToDateTime(rReminders[i].Date);
                         bool bRenewsToday = dtReminderDate.ToString(Utilities.DATE_FORMAT) == DateTime.Today.ToString(Utilities.DATE_FORMAT);
 
-                        if (bRenewsToday || CheckIfReminderIsWithinDateRange(rReminders[i].ReminderPeriod, dtReminderDate))
+                        if (bRenewsToday || CheckIfReminderIsWithinDateRange(rReminders[i].ReminderPeriods, dtReminderDate))
                         {
                             if (rReminders[i].Description.EndsWith("*") && bRenewsToday) // '*' signifies a reminder that needs to be auto updated
                             {
@@ -70,11 +108,11 @@ namespace Reminder
                             else if(rReminders[i].ContactPreference.ToLower().Contains("both"))
                             {
                                 sbTextReminder.Append(Utilities.AppendReminder(rReminders[i]));
-                                sbEmailReminder.Append(Utilities.AppendReminder(rReminders[i]));
+                                sbEmailReminder.Append(Utilities.AppendReminderHTML(rReminders[i]));
                             }
                             else
                             {
-                                sbEmailReminder.Append(Utilities.AppendReminder(rReminders[i]));
+                                sbEmailReminder.Append(Utilities.AppendReminderHTML(rReminders[i]));
                             }
                         }
                     }
@@ -158,14 +196,14 @@ namespace Reminder
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void KeyDown_SubmitReminder(object sender, KeyEventArgs e)
+        private void KeyPress_EventHandler(object sender, KeyPressEventArgs e)
         {
-            switch(e.KeyCode)
+            switch(e.KeyChar)
             {
-                case Keys.Enter:
+                case (char) Keys.Enter:
                     btnAddReminder.PerformClick();
                     break;
-                case Keys.F1:
+                case (char) 17: // ctrl + q
                     cbStopExit.Checked = true;
                     break;
             }
