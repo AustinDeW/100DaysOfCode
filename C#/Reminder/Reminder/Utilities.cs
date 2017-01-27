@@ -4,7 +4,6 @@ using System.Text;
 
 namespace Reminder
 {
-    //TODO: Add comments
     static class Utilities
     {
         // Format that the reminder date needs to be in
@@ -138,11 +137,21 @@ namespace Reminder
             return sbReminder.ToString();
         }
 
+        /// <summary>
+        /// Appends a reminder toa string builder
+        /// </summary>
+        /// <param name="rReminder">Reminder to append</param>
+        /// <returns>Reminder string</returns>
         public static string AppendReminder(Reminder rReminder)
         {
             return Environment.NewLine + rReminder.Description + " on " + rReminder.Date;
         }
 
+        /// <summary>
+        /// Allows you to add HTML to an email
+        /// </summary>
+        /// <param name="rReminder">Reminder to append</param>
+        /// <returns>Reminder string</returns>
         public static string AppendReminderHTML(Reminder rReminder)
         {
             return Environment.NewLine +
@@ -152,6 +161,12 @@ namespace Reminder
                    "</span>";
         }
 
+        /// <summary>
+        /// Verifies that the Reminder Description field isn't empty
+        /// </summary>
+        /// <param name="description">Reminder Description to check</param>
+        /// <param name="reminderDescription">If it passes, it gets outputted here</param>
+        /// <returns>Whether or not it is valid</returns>
         public static bool VerifyReminderDescription(string description, out string reminderDescription)
         {
             if (description.Length > 0)
@@ -166,6 +181,12 @@ namespace Reminder
             }
         }
 
+        /// <summary>
+        /// Verifies that the Reminder Date is later than today's date
+        /// </summary>
+        /// <param name="date">Date selected</param>
+        /// <param name="reminderDate">If it passes, it get outputted here</param>
+        /// <returns>Whether or not it is valid</returns>
         public static bool VerifyReminderDate(string date, out string reminderDate)
         {
             if (Convert.ToDateTime(date) > DateTime.Now)
@@ -180,6 +201,12 @@ namespace Reminder
             }
         }
 
+        /// <summary>
+        /// Verifies that the reminder periods are all Integers
+        /// </summary>
+        /// <param name="periods">String array of reminder periods</param>
+        /// <param name="reminderPeriods">If it passes, it is outputted here</param>
+        /// <returns>Whether or not it is valid</returns>
         public static bool VerifyReminderPeriods(string[] periods, out int[] reminderPeriods)
         {
             try
@@ -195,6 +222,12 @@ namespace Reminder
 
         }
 
+        /// <summary>
+        /// Verifies that it contains month/day/year/"" 
+        /// </summary>
+        /// <param name="updatePeriod">Update period</param>
+        /// <param name="reminderUpdatePeriod">If it passes, it is outputted here</param>
+        /// <returns>Whether or not it is valid</returns>
         public static bool VerifyReminderUpdatePeriod(string updatePeriod, out string reminderUpdatePeriod)
         {
             if (updatePeriod.Contains("month") || updatePeriod.Contains("day") || updatePeriod.Contains("year") || updatePeriod == "")
@@ -210,6 +243,13 @@ namespace Reminder
 
         }
 
+        /// <summary>
+        /// Verifies that at least one of the checkboxes is checked
+        /// </summary>
+        /// <param name="cbTexting">Texing Checkbox value</param>
+        /// <param name="cbEmail">Email Checkbox value</param>
+        /// <param name="reminderContactPreferences">if it passes, it is outputted here</param>
+        /// <returns>Whether or not it is valid</returns>
         public static bool VerifyContactPreferences(bool cbTexting, bool cbEmail, out string reminderContactPreferences)
         {
             if (cbTexting && cbEmail)
