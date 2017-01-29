@@ -52,43 +52,49 @@
             // 
             // tbReminderDescription
             // 
-            this.tbReminderDescription.Location = new System.Drawing.Point(206, 70);
+            this.tbReminderDescription.Location = new System.Drawing.Point(154, 57);
+            this.tbReminderDescription.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbReminderDescription.Name = "tbReminderDescription";
-            this.tbReminderDescription.Size = new System.Drawing.Size(200, 22);
+            this.tbReminderDescription.Size = new System.Drawing.Size(151, 20);
             this.tbReminderDescription.TabIndex = 0;
             // 
             // dtpReminderDate
             // 
-            this.dtpReminderDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpReminderDate.Location = new System.Drawing.Point(206, 98);
+            this.dtpReminderDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpReminderDate.CustomFormat = Utilities.DATE_FORMAT;
+            this.dtpReminderDate.Location = new System.Drawing.Point(154, 80);
+            this.dtpReminderDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dtpReminderDate.Name = "dtpReminderDate";
-            this.dtpReminderDate.Size = new System.Drawing.Size(200, 22);
+            this.dtpReminderDate.Size = new System.Drawing.Size(151, 20);
             this.dtpReminderDate.TabIndex = 1;
-            this.dtpReminderDate.Value = new System.DateTime(2017, 1, 26, 13, 4, 22, 927);
+            this.dtpReminderDate.Value = System.DateTime.Now;
             // 
             // lblReminderDescription
             // 
             this.lblReminderDescription.AutoSize = true;
-            this.lblReminderDescription.Location = new System.Drawing.Point(52, 73);
+            this.lblReminderDescription.Location = new System.Drawing.Point(39, 59);
+            this.lblReminderDescription.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblReminderDescription.Name = "lblReminderDescription";
-            this.lblReminderDescription.Size = new System.Drawing.Size(148, 17);
+            this.lblReminderDescription.Size = new System.Drawing.Size(111, 13);
             this.lblReminderDescription.TabIndex = 2;
             this.lblReminderDescription.Text = "Reminder Description:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(93, 103);
+            this.label2.Location = new System.Drawing.Point(70, 84);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(107, 17);
+            this.label2.Size = new System.Drawing.Size(81, 13);
             this.label2.TabIndex = 3;
             this.label2.Text = "Reminder Date:";
             // 
             // btnAddReminder
             // 
-            this.btnAddReminder.Location = new System.Drawing.Point(292, 369);
+            this.btnAddReminder.Location = new System.Drawing.Point(219, 300);
+            this.btnAddReminder.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnAddReminder.Name = "btnAddReminder";
-            this.btnAddReminder.Size = new System.Drawing.Size(114, 30);
+            this.btnAddReminder.Size = new System.Drawing.Size(86, 24);
             this.btnAddReminder.TabIndex = 6;
             this.btnAddReminder.Text = "Add Reminder";
             this.btnAddReminder.UseVisualStyleBackColor = true;
@@ -102,9 +108,10 @@
             // cbStopExit
             // 
             this.cbStopExit.AutoSize = true;
-            this.cbStopExit.Location = new System.Drawing.Point(12, 408);
+            this.cbStopExit.Location = new System.Drawing.Point(9, 332);
+            this.cbStopExit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbStopExit.Name = "cbStopExit";
-            this.cbStopExit.Size = new System.Drawing.Size(185, 21);
+            this.cbStopExit.Size = new System.Drawing.Size(141, 17);
             this.cbStopExit.TabIndex = 7;
             this.cbStopExit.Text = "Stop Auto Exit ( Ctrl + q )";
             this.cbStopExit.UseVisualStyleBackColor = true;
@@ -114,9 +121,11 @@
             // 
             this.gbxContactPreferences.Controls.Add(this.cbTexting);
             this.gbxContactPreferences.Controls.Add(this.cbEmail);
-            this.gbxContactPreferences.Location = new System.Drawing.Point(206, 258);
+            this.gbxContactPreferences.Location = new System.Drawing.Point(154, 210);
+            this.gbxContactPreferences.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gbxContactPreferences.Name = "gbxContactPreferences";
-            this.gbxContactPreferences.Size = new System.Drawing.Size(200, 84);
+            this.gbxContactPreferences.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbxContactPreferences.Size = new System.Drawing.Size(150, 68);
             this.gbxContactPreferences.TabIndex = 6;
             this.gbxContactPreferences.TabStop = false;
             this.gbxContactPreferences.Text = "Contact Preferences";
@@ -124,9 +133,10 @@
             // cbTexting
             // 
             this.cbTexting.AutoSize = true;
-            this.cbTexting.Location = new System.Drawing.Point(22, 36);
+            this.cbTexting.Location = new System.Drawing.Point(16, 29);
+            this.cbTexting.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbTexting.Name = "cbTexting";
-            this.cbTexting.Size = new System.Drawing.Size(57, 21);
+            this.cbTexting.Size = new System.Drawing.Size(47, 17);
             this.cbTexting.TabIndex = 4;
             this.cbTexting.Text = "Text";
             this.cbTexting.UseVisualStyleBackColor = true;
@@ -134,9 +144,10 @@
             // cbEmail
             // 
             this.cbEmail.AutoSize = true;
-            this.cbEmail.Location = new System.Drawing.Point(114, 36);
+            this.cbEmail.Location = new System.Drawing.Point(86, 29);
+            this.cbEmail.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbEmail.Name = "cbEmail";
-            this.cbEmail.Size = new System.Drawing.Size(64, 21);
+            this.cbEmail.Size = new System.Drawing.Size(51, 17);
             this.cbEmail.TabIndex = 5;
             this.cbEmail.Text = "Email";
             this.cbEmail.UseVisualStyleBackColor = true;
@@ -144,9 +155,10 @@
             // lblReminderPeriods
             // 
             this.lblReminderPeriods.AutoSize = true;
-            this.lblReminderPeriods.Location = new System.Drawing.Point(75, 129);
+            this.lblReminderPeriods.Location = new System.Drawing.Point(56, 105);
+            this.lblReminderPeriods.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblReminderPeriods.Name = "lblReminderPeriods";
-            this.lblReminderPeriods.Size = new System.Drawing.Size(125, 17);
+            this.lblReminderPeriods.Size = new System.Drawing.Size(93, 13);
             this.lblReminderPeriods.TabIndex = 8;
             this.lblReminderPeriods.Text = "Reminder Periods:";
             this.tltpReminderPeriods.SetToolTip(this.lblReminderPeriods, "This specifies how many days, before the due date, that you want a reminder to be" +
@@ -154,9 +166,10 @@
             // 
             // tbReminderPeriods
             // 
-            this.tbReminderPeriods.Location = new System.Drawing.Point(206, 126);
+            this.tbReminderPeriods.Location = new System.Drawing.Point(154, 102);
+            this.tbReminderPeriods.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbReminderPeriods.Name = "tbReminderPeriods";
-            this.tbReminderPeriods.Size = new System.Drawing.Size(200, 22);
+            this.tbReminderPeriods.Size = new System.Drawing.Size(151, 20);
             this.tbReminderPeriods.TabIndex = 2;
             this.tltpReminderPeriods.SetToolTip(this.tbReminderPeriods, "This specifies how many days, before the due date, that you want a reminder to be" +
         " sent to you.\r\n");
@@ -165,35 +178,39 @@
             // 
             this.lblReminderPeriodTip.AutoSize = true;
             this.lblReminderPeriodTip.ForeColor = System.Drawing.Color.Red;
-            this.lblReminderPeriodTip.Location = new System.Drawing.Point(136, 151);
+            this.lblReminderPeriodTip.Location = new System.Drawing.Point(102, 123);
+            this.lblReminderPeriodTip.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblReminderPeriodTip.Name = "lblReminderPeriodTip";
-            this.lblReminderPeriodTip.Size = new System.Drawing.Size(324, 17);
+            this.lblReminderPeriodTip.Size = new System.Drawing.Size(241, 13);
             this.lblReminderPeriodTip.TabIndex = 9;
             this.lblReminderPeriodTip.Text = "( To add multiple values, serperate values with \',\' )";
             // 
             // lblReminderUpdatePeriod
             // 
             this.lblReminderUpdatePeriod.AutoSize = true;
-            this.lblReminderUpdatePeriod.Location = new System.Drawing.Point(32, 189);
+            this.lblReminderUpdatePeriod.Location = new System.Drawing.Point(24, 154);
+            this.lblReminderUpdatePeriod.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblReminderUpdatePeriod.Name = "lblReminderUpdatePeriod";
-            this.lblReminderUpdatePeriod.Size = new System.Drawing.Size(168, 17);
+            this.lblReminderUpdatePeriod.Size = new System.Drawing.Size(126, 13);
             this.lblReminderUpdatePeriod.TabIndex = 11;
             this.lblReminderUpdatePeriod.Text = "Reminder Update Period:";
             // 
             // tbReminderUpdatePeriod
             // 
-            this.tbReminderUpdatePeriod.Location = new System.Drawing.Point(206, 186);
+            this.tbReminderUpdatePeriod.Location = new System.Drawing.Point(154, 151);
+            this.tbReminderUpdatePeriod.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbReminderUpdatePeriod.Name = "tbReminderUpdatePeriod";
-            this.tbReminderUpdatePeriod.Size = new System.Drawing.Size(200, 22);
+            this.tbReminderUpdatePeriod.Size = new System.Drawing.Size(151, 20);
             this.tbReminderUpdatePeriod.TabIndex = 3;
             // 
             // lblReminderUpdatePeriodHelp
             // 
             this.lblReminderUpdatePeriodHelp.AutoSize = true;
             this.lblReminderUpdatePeriodHelp.ForeColor = System.Drawing.Color.Red;
-            this.lblReminderUpdatePeriodHelp.Location = new System.Drawing.Point(94, 211);
+            this.lblReminderUpdatePeriodHelp.Location = new System.Drawing.Point(70, 171);
+            this.lblReminderUpdatePeriodHelp.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblReminderUpdatePeriodHelp.Name = "lblReminderUpdatePeriodHelp";
-            this.lblReminderUpdatePeriodHelp.Size = new System.Drawing.Size(405, 17);
+            this.lblReminderUpdatePeriodHelp.Size = new System.Drawing.Size(299, 13);
             this.lblReminderUpdatePeriodHelp.TabIndex = 12;
             this.lblReminderUpdatePeriodHelp.Text = "( Specify every month or day or year. e.g. 1 month or 23 days )";
             // 
@@ -201,17 +218,18 @@
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(171, 228);
+            this.label1.Location = new System.Drawing.Point(128, 185);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(269, 17);
+            this.label1.Size = new System.Drawing.Size(199, 13);
             this.label1.TabIndex = 13;
             this.label1.Text = "( Leave blank if it is a one time reminder )";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(511, 441);
+            this.ClientSize = new System.Drawing.Size(383, 358);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblReminderUpdatePeriodHelp);
             this.Controls.Add(this.lblReminderUpdatePeriod);
@@ -226,6 +244,7 @@
             this.Controls.Add(this.lblReminderDescription);
             this.Controls.Add(this.dtpReminderDate);
             this.Controls.Add(this.tbReminderDescription);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reminders";

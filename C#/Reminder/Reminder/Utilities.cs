@@ -156,7 +156,7 @@ namespace Reminder
         {
             return Environment.NewLine +
                    rReminder.Description +
-                   " on <span style=\"color: red; font-weight: bold\"" +
+                   " on <span style=\"color: red; font-weight: bold\">" +
                    rReminder.Date +
                    "</span>";
         }
