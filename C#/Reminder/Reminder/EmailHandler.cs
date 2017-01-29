@@ -69,11 +69,9 @@ namespace Reminder
         {
             try
             {
-                //comment out to use App.config password
-                pw = FileHandler.ReadFile(ConfigurationManager.AppSettings["ReminderDataFileLocation"] + "Other.txt")[0];
-
-                //uncomment to use password from App.config
-                //pw = ConfigurationManager.AppSettings["FromEmailPassword"];
+                pw = ConfigurationManager.AppSettings["FromEmailPassword"] == "" ?
+                        FileHandler.ReadFile(ConfigurationManager.AppSettings["ReminderDataFileLocation"] + "Other.txt")[0] :
+                        ConfigurationManager.AppSettings["FromEmailPassword"];
             }
             catch (Exception ex)
             {
