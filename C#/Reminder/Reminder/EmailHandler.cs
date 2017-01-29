@@ -69,10 +69,13 @@ namespace Reminder
         {
             try
             {
-                // You can hardcode email's password here
+                //comment out to use App.config password
                 pw = FileHandler.ReadFile(ConfigurationManager.AppSettings["ReminderDataFileLocation"] + "Other.txt")[0];
+
+                //uncomment to use password from App.config
+                //pw = ConfigurationManager.AppSettings["FromEmailPassword"];
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine("Unable to get password for email.\n\n" + ex.Message);
             }
