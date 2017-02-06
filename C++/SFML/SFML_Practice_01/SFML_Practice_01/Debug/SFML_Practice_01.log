@@ -1,0 +1,5 @@
+﻿  main.cpp
+c:\users\austin.dewitt\documents\visual studio 2015\projects\c++\sfml\sfml_practice_01\sfml_practice_01\main.cpp(9): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\austin.dewitt\documents\visual studio 2015\projects\c++\sfml\sfml_practice_01\sfml_practice_01\main.cpp(90): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  SFML_Practice_01.vcxproj -> C:\Users\austin.dewitt\Documents\Visual Studio 2015\Projects\C++\SFML\SFML_Practice_01\Debug\SFML_Practice_01.exe
+  SFML_Practice_01.vcxproj -> C:\Users\austin.dewitt\Documents\Visual Studio 2015\Projects\C++\SFML\SFML_Practice_01\Debug\SFML_Practice_01.pdb (Full PDB)
