@@ -69,7 +69,7 @@ namespace Reminder
         {
             try
             {
-                pw = ConfigurationManager.AppSettings["FromEmailPassword"] == "" ?
+                pw = ConfigurationManager.AppSettings["FromEmailPassword"] == "-" ?
                         FileHandler.ReadFile(ConfigurationManager.AppSettings["ReminderDataFileLocation"] + "Other.txt")[0] :
                         ConfigurationManager.AppSettings["FromEmailPassword"];
             }
