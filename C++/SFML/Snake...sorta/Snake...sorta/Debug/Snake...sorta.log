@@ -1,0 +1,5 @@
+﻿  main.cpp
+c:\users\austin.dewitt\documents\github\100daysofcode\c++\sfml\snake...sorta\snake...sorta\main.cpp(11): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\austin.dewitt\documents\github\100daysofcode\c++\sfml\snake...sorta\snake...sorta\main.cpp(128): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+  Snake...sorta.vcxproj -> C:\Users\austin.dewitt\Documents\GitHub\100DaysOfCode\C++\SFML\Snake...sorta\Debug\Snake...sorta.exe
+  Snake...sorta.vcxproj -> C:\Users\austin.dewitt\Documents\GitHub\100DaysOfCode\C++\SFML\Snake...sorta\Debug\Snake...sorta.pdb (Full PDB)
