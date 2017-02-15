@@ -1,6 +1,6 @@
 #include "Game.h"
 
-Game::Game(sf::VideoMode vm, std::string title)
+Game::Game(sf::VideoMode vm, std::string title, int players)
 	: window(vm, title), centerLine(sf::Vector2f(1, GetWindow()->getSize().x))
 {
 	window.setFramerateLimit(60);
@@ -66,6 +66,9 @@ void Game::Update()
 	if (!key_up && !key_down) player1_yPos = 0;
 
 	player1.Move(sf::Vector2f(0, player1_yPos));
+
+	if (player1.GetPosition()->y < 0) player1.SetPosition(sf::Vector2f(20, 0));
+	if (player1.GetPosition()->y > 600 - player1.GetSize()->y) player1.SetPosition(sf::Vector2f(20, 500));
 }
 
 void Game::Render()

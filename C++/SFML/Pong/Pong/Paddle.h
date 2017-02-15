@@ -7,11 +7,12 @@ class Paddle
 	~Paddle();
 
 	const sf::Vector2f* GetPosition();
-	void SetPosition(sf::Vector2f pos);
 	const sf::Vector2f* GetSize();
 	const sf::FloatRect* GetGlobalBounds();
-	void Move(sf::Vector2f velocity);
 	sf::RectangleShape* GetDrawable();
+
+	void SetPosition(sf::Vector2f pos);
+	void Move(sf::Vector2f velocity);
 
 	private:
 	sf::RectangleShape paddle;

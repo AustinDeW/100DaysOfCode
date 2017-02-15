@@ -3,7 +3,7 @@
 class Game
 {
 	public:
-	Game(sf::VideoMode vm, std::string title);
+	Game(sf::VideoMode vm, std::string title, int players);
 	~Game();
 
 	sf::RenderWindow* GetWindow();
