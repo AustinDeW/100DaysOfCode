@@ -1,3 +1,12 @@
-﻿  Main.cpp
+﻿  Game.cpp
+c:\users\austin.dewitt\documents\github\100daysofcode\c++\sfml\pong\pong\game.cpp(4): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\austin.dewitt\documents\github\100daysofcode\c++\sfml\pong\pong\game.cpp(70): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\austin.dewitt\documents\github\100daysofcode\c++\sfml\pong\pong\game.cpp(104): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+c:\users\austin.dewitt\documents\github\100daysofcode\c++\sfml\pong\pong\game.cpp(154): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\austin.dewitt\documents\github\100daysofcode\c++\sfml\pong\pong\game.cpp(161): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\austin.dewitt\documents\github\100daysofcode\c++\sfml\pong\pong\game.cpp(168): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\austin.dewitt\documents\github\100daysofcode\c++\sfml\pong\pong\game.cpp(176): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\austin.dewitt\documents\github\100daysofcode\c++\sfml\pong\pong\game.cpp(182): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\austin.dewitt\documents\github\100daysofcode\c++\sfml\pong\pong\game.cpp(188): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   Pong.vcxproj -> C:\Users\austin.dewitt\Documents\GitHub\100DaysOfCode\C++\SFML\Pong\Debug\Pong.exe
   Pong.vcxproj -> C:\Users\austin.dewitt\Documents\GitHub\100DaysOfCode\C++\SFML\Pong\Debug\Pong.pdb (Full PDB)

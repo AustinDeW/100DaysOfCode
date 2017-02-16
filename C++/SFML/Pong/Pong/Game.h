@@ -1,10 +1,16 @@
 #pragma once
 #include "Paddle.h"
+#include <iostream>
 class Game
 {
 	public:
-	Game(sf::VideoMode vm, std::string title, int players);
+	bool mainMenuOpen = true;
+	sf::Font font;
+
+	Game(sf::VideoMode vm, std::string title);
 	~Game();
+
+	void MainMenu();
 
 	sf::RenderWindow* GetWindow();
 	void HandleInput();
@@ -12,6 +18,7 @@ class Game
 	void Render();
 
 	private:
+
 	sf::RenderWindow window;
 	sf::RectangleShape centerLine;
 	Paddle player1;
@@ -20,6 +27,7 @@ class Game
 	bool key_up = false;
 	bool key_down = false;
 	int player1_yPos = 0;
+	int players = 0;
 
 };
 
