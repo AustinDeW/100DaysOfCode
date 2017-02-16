@@ -26,7 +26,7 @@ int main()
 
 	int score = 0;
 	sf::Font fontSith;
-	fontSith.loadFromFile("C:/Users/austin.dewitt/Documents/GitHub/100DaysOfCode/C++/SFML/Snake...sorta/Snake...sorta/Data/Roboto/Roboto-Regular.ttf");
+	fontSith.loadFromFile("C:/Users/austin/Documents/GitHub/C++/SFML/Snake...sorta/Snake...sorta/Data/Roboto/Roboto-Regular.ttf");
 	sf::Text txtScore(std::to_string(score),fontSith);
 	txtScore.setPosition(340, 0);
 	txtScore.setCharacterSize(30);
