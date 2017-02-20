@@ -25,9 +25,9 @@ const sf::Vector2f* Paddle::GetSize()
 	return &paddle.getSize();
 }
 
-const sf::FloatRect* Paddle::GetGlobalBounds()
+const sf::FloatRect Paddle::GetGlobalBounds()
 {
-	return &paddle.getGlobalBounds();
+	return paddle.getGlobalBounds();
 }
 
 void Paddle::Move(sf::Vector2f velocity)

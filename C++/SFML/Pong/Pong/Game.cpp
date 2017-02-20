@@ -1,5 +1,6 @@
 #include "Game.h"
 
+//TODO: Add AI for Single Player
 Game::Game(sf::VideoMode vm, std::string title)
 	: window(vm, title), centerLine(sf::Vector2f(1, GetWindow()->getSize().x))
 {
@@ -10,8 +11,18 @@ Game::Game(sf::VideoMode vm, std::string title)
 	centerLine.setFillColor(sf::Color::Green);
 	centerLine.setPosition(401, 0);
 
+	score.setFont(font);
+	score.setCharacterSize(48);
+	score.setFillColor(sf::Color::White);
+	sf::FloatRect scoreRect = score.getLocalBounds();
+	score.setOrigin(scoreRect.left + scoreRect.width / 2.0f, scoreRect.top + scoreRect.height / 2.0f);
+	score.setPosition(sf::Vector2f(window.getSize().x / 2 - 45, 20));
+	score.setString("0   0");
+
 	player1.SetPosition(sf::Vector2f(20, 300 - player1.GetSize()->y / 2));
 	player2.SetPosition(sf::Vector2f(760, 300 - player2.GetSize()->y / 2));
+
+	ball.SetPosition(sf::Vector2f(window.getSize().x / 2 - 15, window.getSize().y / 2 - 15));
 }
 
 sf::RenderWindow* Game::GetWindow()
@@ -31,30 +42,76 @@ void Game::HandleInput()
 
 		if (event.type == sf::Event::KeyPressed)
 		{
-			switch (event.key.code)
+			if (players == 1)
 			{
-				case sf::Keyboard::Escape:
-					MainMenu();
-					break;
-				case sf::Keyboard::Up:
-					key_up = true;
-					break;
-				case sf::Keyboard::Down:
-					key_down = true;
-					break;
+				switch (event.key.code)
+				{
+					case sf::Keyboard::Escape:
+						BackToMainMenu();
+						break;
+					case sf::Keyboard::Up:
+						player1_key_up = true;
+						break;
+					case sf::Keyboard::Down:
+						player1_key_down = true;
+						break;
+				}
 			}
+			else
+			{
+				switch (event.key.code)
+				{
+					case sf::Keyboard::Escape:
+						BackToMainMenu();
+						break;
+					case sf::Keyboard::W:
+						player1_key_up = true;
+						break;
+					case sf::Keyboard::S:
+						player1_key_down = true;
+						break;
+					case sf::Keyboard::Up:
+						player2_key_up = true;
+						break;
+					case sf::Keyboard::Down:
+						player2_key_down = true;
+						break;
+				}
+			}
+
 		}
 
 		if (event.type == sf::Event::KeyReleased)
 		{
-			switch (event.key.code)
+			if (players == 1)
 			{
-				case sf::Keyboard::Up:
-					key_up = false;
-					break;
-				case sf::Keyboard::Down:
-					key_down = false;
-					break;
+				switch (event.key.code)
+				{
+					case sf::Keyboard::Up:
+						player1_key_up = false;
+						break;
+					case sf::Keyboard::Down:
+						player1_key_down = false;
+						break;
+				}
+			}
+			else
+			{
+				switch (event.key.code)
+				{
+					case sf::Keyboard::W:
+						player1_key_up = false;
+						break;
+					case sf::Keyboard::S:
+						player1_key_down = false;
+						break;
+					case sf::Keyboard::Up:
+						player2_key_up = false;
+						break;
+					case sf::Keyboard::Down:
+						player2_key_down = false;
+						break;
+				}
 			}
 		}
 	}
@@ -62,25 +119,81 @@ void Game::HandleInput()
 
 void Game::Update()
 {
-	if (key_up) player1_yPos = -5;
-	if (key_down) player1_yPos = 5;
-	if (key_up && key_down) player1_yPos = 0;
-	if (!key_up && !key_down) player1_yPos = 0;
+	if (player1_key_up) player1_yPos = -5;
+	if (player1_key_down) player1_yPos = 5;
+	if (player1_key_up && player1_key_down) player1_yPos = 0;
+	if (!player1_key_up && !player1_key_down) player1_yPos = 0;
 
 	player1.Move(sf::Vector2f(0, player1_yPos));
 
 	if (player1.GetPosition()->y < 0) player1.SetPosition(sf::Vector2f(20, 0));
 	if (player1.GetPosition()->y > 600 - player1.GetSize()->y) player1.SetPosition(sf::Vector2f(20, 500));
+
+	if (players == 2)
+	{
+		if (player2_key_up) player2_yPos = -5;
+		if (player2_key_down) player2_yPos = 5;
+		if (player2_key_up && player2_key_down) player2_yPos = 0;
+		if (!player2_key_up && !player2_key_down) player2_yPos = 0;
+
+		player2.Move(sf::Vector2f(0, player2_yPos));
+
+		if (player2.GetPosition()->y < 0) player2.SetPosition(sf::Vector2f(760, 0));
+		if (player2.GetPosition()->y > 600 - player2.GetSize()->y)player2.SetPosition(sf::Vector2f(760, 500));
+	}
+
+	ball.Move(sf::Vector2f(ball_xPos, ball_yPos));
+
+	if (ball.GetPosition()->y < 0) ball_yPos = -ball_yPos;
+	if (ball.GetPosition()->y > window.getSize().y - ball.GetRadius() * 2) ball_yPos = -ball_yPos;
+
+	if (ball.GetGlobalBounds().intersects(player1.GetGlobalBounds()))
+	{
+		ball_xPos = -ball_xPos;
+	}
+	if (ball.GetGlobalBounds().intersects(player2.GetGlobalBounds()))
+	{
+		ball_xPos = -ball_xPos;
+	}
+
+	if (ball.GetPosition()->x > window.getSize().x)
+	{
+		player1_score++;
+		ResetBall();
+	}
+	if (ball.GetPosition()->x < 0)
+	{
+		player2_score++;
+		ResetBall();
+	}
 }
 
 void Game::Render()
 {
 	window.clear(sf::Color::Black);
 
+	std::stringstream ssScore; ssScore << player1_score << "   " << player2_score;
+	score.setString(ssScore.str());
+	window.draw(score);
 	window.draw(centerLine);
 	window.draw(*player1.GetDrawable());
 	window.draw(*player2.GetDrawable());
+	window.draw(*ball.GetDrawable());
 	window.display();
+}
+
+void Game::ResetBall()
+{
+	ball.SetPosition(sf::Vector2f(window.getSize().x / 2 - 15, window.getSize().y / 2 - 15));
+}
+
+void Game::BackToMainMenu()
+{
+	score.setString("0   0");
+	player1_score = 0;
+	player2_score = 0;
+	ResetBall();
+	MainMenu();
 }
 
 Game::~Game()

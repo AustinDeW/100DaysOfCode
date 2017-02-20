@@ -8,7 +8,7 @@ class Paddle
 
 	const sf::Vector2f* GetPosition();
 	const sf::Vector2f* GetSize();
-	const sf::FloatRect* GetGlobalBounds();
+	const sf::FloatRect GetGlobalBounds();
 	sf::RectangleShape* GetDrawable();
 
 	void SetPosition(sf::Vector2f pos);
