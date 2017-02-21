@@ -34,11 +34,13 @@ class Game
 	bool player1_key_down = false;
 	bool player2_key_up = false;
 	bool player2_key_down = false;
+	bool ballDirection_LR = false; // False is left, true is right
+	bool ballDirection_UD = false; // False is down, true is up
 	int player1_yPos = 0;
 	int player2_yPos = 0;
 	int players = 0;
-	int ball_yPos = -2;
-	int ball_xPos = -2;
+	int ball_yPos = -3;
+	int ball_xPos = -3;
 	int player1_score = 0;
 	int player2_score = 0;
 };

@@ -141,6 +141,45 @@ void Game::Update()
 		if (player2.GetPosition()->y < 0) player2.SetPosition(sf::Vector2f(760, 0));
 		if (player2.GetPosition()->y > 600 - player2.GetSize()->y)player2.SetPosition(sf::Vector2f(760, 500));
 	}
+	else
+	{
+		//AI here
+		if (ballDirection_LR == 1)
+		{
+			if (ball_xPos == 3 && ball_yPos == 3)
+			{
+				ballDirection_UD = false;
+			}
+			else if (ball_xPos == 3 && ball_yPos == -3)
+			{
+				ballDirection_UD = true;
+			}
+			if (ballDirection_UD) // up
+			{
+				player2_yPos = -7;
+			}
+			else if (!ballDirection_UD && ball.GetPosition()->y < window.getSize().y / 3)
+			{
+				player2_yPos = -7;
+			}
+			//else if (ballDirection_UD && ball.GetPosition()->y < window.getSize().y - window.getSize().y / 2)
+			//{
+			//	player2_yPos = 7;
+			//	std::cout << "asdf" << std::endl;
+			//}
+			else if(!ballDirection_UD) // down
+			{
+				player2_yPos = 7;
+			}
+
+			player2.Move(sf::Vector2f(0, player2_yPos));
+
+			if (player2.GetPosition()->y < 0) player2.SetPosition(sf::Vector2f(760, 0));
+			if (player2.GetPosition()->y > 600 - player2.GetSize()->y)player2.SetPosition(sf::Vector2f(760, 500));
+		}
+	}
+
+	
 
 	ball.Move(sf::Vector2f(ball_xPos, ball_yPos));
 
@@ -150,10 +189,12 @@ void Game::Update()
 	if (ball.GetGlobalBounds().intersects(player1.GetGlobalBounds()))
 	{
 		ball_xPos = -ball_xPos;
+		ballDirection_LR = true;
 	}
-	if (ball.GetGlobalBounds().intersects(player2.GetGlobalBounds()))
+	else if (ball.GetGlobalBounds().intersects(player2.GetGlobalBounds()))
 	{
 		ball_xPos = -ball_xPos;
+		ballDirection_LR = false;
 	}
 
 	if (ball.GetPosition()->x > window.getSize().x)
