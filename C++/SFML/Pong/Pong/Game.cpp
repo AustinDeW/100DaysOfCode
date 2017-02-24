@@ -40,7 +40,7 @@ void Game::HandleInput()
 			window.close();
 		}
 
-		if (event.type == sf::Event::KeyPressed)
+		else if (event.type == sf::Event::KeyPressed)
 		{
 			if (players == 1)
 			{
@@ -81,7 +81,7 @@ void Game::HandleInput()
 
 		}
 
-		if (event.type == sf::Event::KeyReleased)
+		else if (event.type == sf::Event::KeyReleased)
 		{
 			if (players == 1)
 			{
@@ -120,26 +120,26 @@ void Game::HandleInput()
 void Game::Update()
 {
 	if (player1_key_up) player1_yPos = -5;
-	if (player1_key_down) player1_yPos = 5;
-	if (player1_key_up && player1_key_down) player1_yPos = 0;
-	if (!player1_key_up && !player1_key_down) player1_yPos = 0;
+	else if (player1_key_down) player1_yPos = 5;
+	else if (player1_key_up && player1_key_down) player1_yPos = 0;
+	else if (!player1_key_up && !player1_key_down) player1_yPos = 0;
 
 	player1.Move(sf::Vector2f(0, player1_yPos));
 
 	if (player1.GetPosition()->y < 0) player1.SetPosition(sf::Vector2f(20, 0));
-	if (player1.GetPosition()->y > 600 - player1.GetSize()->y) player1.SetPosition(sf::Vector2f(20, 500));
+	else if (player1.GetPosition()->y > 600 - player1.GetSize()->y) player1.SetPosition(sf::Vector2f(20, 500));
 
 	if (players == 2)
 	{
 		if (player2_key_up) player2_yPos = -5;
-		if (player2_key_down) player2_yPos = 5;
-		if (player2_key_up && player2_key_down) player2_yPos = 0;
-		if (!player2_key_up && !player2_key_down) player2_yPos = 0;
+		else if (player2_key_down) player2_yPos = 5;
+		else if (player2_key_up && player2_key_down) player2_yPos = 0;
+		else if (!player2_key_up && !player2_key_down) player2_yPos = 0;
 
 		player2.Move(sf::Vector2f(0, player2_yPos));
 
 		if (player2.GetPosition()->y < 0) player2.SetPosition(sf::Vector2f(760, 0));
-		if (player2.GetPosition()->y > 600 - player2.GetSize()->y)player2.SetPosition(sf::Vector2f(760, 500));
+		else if (player2.GetPosition()->y > 600 - player2.GetSize()->y)player2.SetPosition(sf::Vector2f(760, 500));
 	}
 	else
 	{
@@ -154,7 +154,11 @@ void Game::Update()
 			{
 				ballDirection_UD = true;
 			}
-			if (ballDirection_UD) // up
+			if (ballDirection_UD && ball.GetPosition()->y > window.getSize().y / 4)
+			{
+				player2_yPos = -3;
+			}
+			else if (ballDirection_UD) // up
 			{
 				player2_yPos = -7;
 			}
@@ -162,11 +166,6 @@ void Game::Update()
 			{
 				player2_yPos = -7;
 			}
-			//else if (ballDirection_UD && ball.GetPosition()->y < window.getSize().y - window.getSize().y / 2)
-			//{
-			//	player2_yPos = 7;
-			//	std::cout << "asdf" << std::endl;
-			//}
 			else if(!ballDirection_UD) // down
 			{
 				player2_yPos = 7;
@@ -175,7 +174,7 @@ void Game::Update()
 			player2.Move(sf::Vector2f(0, player2_yPos));
 
 			if (player2.GetPosition()->y < 0) player2.SetPosition(sf::Vector2f(760, 0));
-			if (player2.GetPosition()->y > 600 - player2.GetSize()->y)player2.SetPosition(sf::Vector2f(760, 500));
+			else if (player2.GetPosition()->y > 600 - player2.GetSize()->y)player2.SetPosition(sf::Vector2f(760, 500));
 		}
 	}
 
@@ -184,7 +183,7 @@ void Game::Update()
 	ball.Move(sf::Vector2f(ball_xPos, ball_yPos));
 
 	if (ball.GetPosition()->y < 0) ball_yPos = -ball_yPos;
-	if (ball.GetPosition()->y > window.getSize().y - ball.GetRadius() * 2) ball_yPos = -ball_yPos;
+	else if (ball.GetPosition()->y > window.getSize().y - ball.GetRadius() * 2) ball_yPos = -ball_yPos;
 
 	if (ball.GetGlobalBounds().intersects(player1.GetGlobalBounds()))
 	{
@@ -202,7 +201,7 @@ void Game::Update()
 		player1_score++;
 		ResetBall();
 	}
-	if (ball.GetPosition()->x < 0)
+	else if (ball.GetPosition()->x < 0)
 	{
 		player2_score++;
 		ResetBall();
@@ -289,7 +288,7 @@ void Game::MainMenu()
 				window.close();
 				mainMenuOpen = false;
 			}
-			if (event.type == sf::Event::KeyPressed)
+			else if (event.type == sf::Event::KeyPressed)
 			{
 				switch (event.key.code)
 				{
@@ -299,11 +298,11 @@ void Game::MainMenu()
 						break;
 				}
 			}
-			if (event.type == sf::Event::KeyReleased)
+			else if (event.type == sf::Event::KeyReleased)
 			{
 
 			}
-			if (event.type == sf::Event::MouseButtonPressed)
+			else if (event.type == sf::Event::MouseButtonPressed)
 			{
 				if (menu_singlePlayer.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
 				{
@@ -325,7 +324,7 @@ void Game::MainMenu()
 					mainMenuOpen = false;
 				}
 			}
-			if (event.type == sf::Event::MouseMoved)
+			else if (event.type == sf::Event::MouseMoved)
 			{
 				if (menu_twoPlayer.getGlobalBounds().contains(event.mouseMove.x, event.mouseMove.y))
 				{
