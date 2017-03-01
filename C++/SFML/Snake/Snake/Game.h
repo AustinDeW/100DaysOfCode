@@ -1,5 +1,5 @@
 #pragma once
-#include "Window.h"
+#include "GameWindow.h"
 class Game
 {
 	public:
