@@ -1,7 +1,7 @@
 #include "Window.h"
 
 Window::Window()
-	:window(sf::VideoMode(600,800), "Snake")
+	:window(sf::VideoMode(800,600), "Snake")
 {
 }
 
@@ -17,6 +17,11 @@ Window::~Window()
 sf::RenderWindow* Window::GetWindow()
 {
 	return &window;
+}
+
+void Window::CloseWindow()
+{
+	window.close();
 }
 
 void Window::BeginDraw()

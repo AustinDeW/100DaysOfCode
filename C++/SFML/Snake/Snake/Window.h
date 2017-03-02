@@ -8,6 +8,7 @@ class Window
 	~Window();
 
 	sf::RenderWindow* GetWindow();
+	void CloseWindow();
 	void BeginDraw();
 	void Draw(sf::Drawable& drawable);
 	void EndDraw();
@@ -17,4 +18,3 @@ class Window
 	private:
 	sf::RenderWindow window;
 };
-

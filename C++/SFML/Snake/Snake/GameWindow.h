@@ -1,5 +1,7 @@
 #pragma once
 #include "Window.h"
+#include "Snake.h"
+#include <iostream>
 class GameWindow
 {
 	public:
@@ -8,6 +10,7 @@ class GameWindow
 
 	private:
 	Window gameWindow;
+	Snake snake;
 	void HandleInput();
 	void Update();
 };
