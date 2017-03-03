@@ -13,5 +13,6 @@ class GameWindow
 	Snake snake;
 	void HandleInput();
 	void Update();
+	bool key_up = false, key_down = false, key_right = false, key_left = false;
 };
 

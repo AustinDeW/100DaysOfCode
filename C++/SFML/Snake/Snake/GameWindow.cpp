@@ -36,16 +36,16 @@ void GameWindow::HandleInput()
 			switch (event.key.code)
 			{
 				case sf::Keyboard::Up:
-					snake.SetDirection(Direction::UP);
+					key_up = true;
 					break;
 				case sf::Keyboard::Down:
-					snake.SetDirection(Direction::DOWN);
+					key_down = true;
 					break;
 				case sf::Keyboard::Right:
-					snake.SetDirection(Direction::RIGHT);
+					key_right = true;
 					break;
 				case sf::Keyboard::Left:
-					snake.SetDirection(Direction::LEFT);
+					key_left = true;
 					break;
 			}
 		}
@@ -54,16 +54,16 @@ void GameWindow::HandleInput()
 			switch (event.key.code)
 			{
 				case sf::Keyboard::Up:
-					snake.SetDirection(Direction::NONE);
+					key_up = false;
 					break;
 				case sf::Keyboard::Down:
-					snake.SetDirection(Direction::NONE);
+					key_down = false;
 					break;
 				case sf::Keyboard::Right:
-					snake.SetDirection(Direction::NONE);
+					key_right = false;
 					break;
 				case sf::Keyboard::Left:
-					snake.SetDirection(Direction::NONE);
+					key_left = false;
 					break;
 			}
 		}
@@ -73,5 +73,5 @@ void GameWindow::HandleInput()
 void GameWindow::Update()
 {
 	//std::cout << snake.GetStringDirection() << std::endl;
-	snake.Move();
+	snake.Move(key_up, key_down, key_right, key_left);
 }

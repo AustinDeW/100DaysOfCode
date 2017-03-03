@@ -3,11 +3,13 @@
 Window::Window()
 	:window(sf::VideoMode(800,600), "Snake")
 {
+	window.setFramerateLimit(60);
 }
 
 Window::Window(sf::VideoMode& vm, const std::string& title)
 	:window(vm,title)
 {
+	window.setFramerateLimit(60);
 }
 
 Window::~Window()

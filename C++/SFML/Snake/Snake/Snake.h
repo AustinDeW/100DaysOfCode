@@ -16,9 +16,12 @@ class Snake
 	Direction GetDirection();
 	std::string GetStringDirection();
 	SnakeContainer body;
-	void Move();
+	void Move(bool& up, bool& down, bool& right, bool& left);
 
 	private:
 	Direction direction;
+	float snake_yPos = 0, snake_xPos = 0;
+	float spacing_y = 0, spacing_x = 0;
+	const float VELOCITY = 4.0f;
 };
 
