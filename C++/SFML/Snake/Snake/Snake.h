@@ -1,12 +1,15 @@
 #pragma once
-#include <SFML/Graphics.hpp>
+#include "Apple.h"
 #include <iostream>
+#include <stdlib.h>
 using SnakeContainer = std::vector<sf::RectangleShape>;
 enum class Direction { NONE, UP, DOWN, RIGHT, LEFT };
 
 class Snake
 {
 	public:
+	bool isGameOver = false;
+
 	Snake();
 	~Snake();
 
@@ -17,6 +20,7 @@ class Snake
 	std::string GetStringDirection();
 	SnakeContainer body;
 	void Move(bool& up, bool& down, bool& right, bool& left);
+	void Extend();
 
 	private:
 	Direction direction;

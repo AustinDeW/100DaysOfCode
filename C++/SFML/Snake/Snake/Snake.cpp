@@ -13,11 +13,12 @@ void Snake::Reset()
 {
 	direction = Direction::NONE;
 	float startX = 400, startY = 300;
+	body.clear();
 	body.push_back(sf::RectangleShape(sf::Vector2f(16,16)));
 	body[0].setFillColor(sf::Color::Yellow);
 	body[0].setPosition(startX, startY);
 
-	for (int i = 1; i < 50; i++)
+	for (int i = 1; i < 5; i++)
 	{
 		body.push_back(sf::RectangleShape(sf::Vector2f(16, 16)));
 		body[i].setFillColor(sf::Color::Green);
@@ -102,4 +103,19 @@ void Snake::Move(bool& up, bool& down, bool& right, bool& left)
 	else if (!right && !left) snake_xPos = 0;
 
 	body[0].move(snake_xPos, snake_yPos);
+
+	if (body[0].getPosition().x < 0 ||
+		body[0].getPosition().x > 800 - 16 ||
+		body[0].getPosition().y < 0 ||
+		body[0].getPosition().y > 600 - 16)
+	{
+		isGameOver = true;
+		Reset();
+	}
+}
+
+void Snake::Extend()
+{
+	body.push_back(sf::RectangleShape(sf::Vector2f(16, 16)));
+	body.at(body.size() - 1).setFillColor(sf::Color::Green);
 }
