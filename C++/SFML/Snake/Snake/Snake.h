@@ -24,6 +24,8 @@ class Snake
 
 	private:
 	Direction direction;
+	sf::Clock clock;
+	sf::Time elapsed;
 	float snake_yPos = 0, snake_xPos = 0;
 	float spacing_y = 0, spacing_x = 0;
 	const float VELOCITY = 4.0f;

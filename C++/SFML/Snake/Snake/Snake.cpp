@@ -23,8 +23,9 @@ void Snake::Reset()
 		body.push_back(sf::RectangleShape(sf::Vector2f(16, 16)));
 		body[i].setFillColor(sf::Color::Green);
 		body[i].setPosition(startX, startY += 18);
-
 	}
+
+	clock.restart();
 }
 
 void Snake::SetDirection(Direction dir)
