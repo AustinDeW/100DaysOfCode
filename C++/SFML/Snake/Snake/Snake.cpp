@@ -65,24 +65,16 @@ std::string Snake::GetStringDirection()
 
 void Snake::Move(bool& up, bool& down, bool& right, bool& left)
 {
-	if (up || down || right || left)
-	{
-		for (int i = body.size() - 1; i > 0; --i)
-		{
-			body[i].setPosition(body[i - 1].getPosition().x + spacing_x, body[i - 1].getPosition().y + spacing_y);
-		}
-	}
-
 	if (up)
 	{
 		snake_yPos = -VELOCITY;
-		spacing_y = 13;
+		spacing_y = 14;
 		spacing_x = 0;
 	}
 	else if (down)
 	{
 		snake_yPos = VELOCITY;
-		spacing_y = -13;
+		spacing_y = -14;
 		spacing_x = 0;
 	}
 	else if (up && down) snake_yPos = 0;
@@ -91,28 +83,53 @@ void Snake::Move(bool& up, bool& down, bool& right, bool& left)
 	if (right)
 	{
 		snake_xPos = VELOCITY;
-		spacing_x = -13;
+		spacing_x = -14;
 		spacing_y = 0;
 	}
 	else if (left)
 	{
 		snake_xPos = -VELOCITY;
-		spacing_x = 13;
+		spacing_x = 14;
 		spacing_y = 0;
 	}
 	else if (right && left) snake_xPos = 0;
 	else if (!right && !left) snake_xPos = 0;
 
 	body[0].move(snake_xPos, snake_yPos);
+	if (up || down || right || left)
+	{
+		//// Problem is the body is moving to its position faster than the movement speed is
+		//for (int i = body.size() - 1; i > 0; --i)
+		//{
+		//	body[i].setPosition(body[i - 1].getPosition().x + spacing_x, body[i - 1].getPosition().y + spacing_y);
+		//	//std::cout << elapsed.asSeconds() << std::endl;
+		//	//std::cout << body[i].getPosition().x << " " << body[i].getPosition().y << " \t ";
+		//}
+		//std::cout << std::endl;
+	}
 
+	// Checks if snake head hits any of the walls
 	if (body[0].getPosition().x < 0 ||
 		body[0].getPosition().x > 800 - 16 ||
 		body[0].getPosition().y < 0 ||
 		body[0].getPosition().y > 600 - 16)
 	{
 		isGameOver = true;
+		up = false; down = false; right = false; left = false;
 		Reset();
 	}
+
+	// Checks if snake head hits any of its body
+	//for (int i = 1; i < body.size(); i++)
+	//{
+	//	if (body[0].getGlobalBounds().intersects(body[i].getGlobalBounds()))
+	//	{
+	//		isGameOver = true;
+	//		up = false; down = false; right = false; left = false;
+	//		Reset();
+	//		break;
+	//	}
+	//}
 }
 
 void Snake::Extend()
