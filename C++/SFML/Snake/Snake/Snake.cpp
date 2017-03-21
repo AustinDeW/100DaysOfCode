@@ -2,7 +2,8 @@
 
 Snake::Snake()
 {
-	Reset();
+	// It's for the best...
+	Snake::Reset();
 }
 
 Snake::~Snake()
@@ -99,12 +100,12 @@ void Snake::Move(bool& up, bool& down, bool& right, bool& left)
 	if (up || down || right || left)
 	{
 		//// Problem is the body is moving to its position faster than the movement speed is
-		//for (int i = body.size() - 1; i > 0; --i)
-		//{
-		//	body[i].setPosition(body[i - 1].getPosition().x + spacing_x, body[i - 1].getPosition().y + spacing_y);
-		//	//std::cout << elapsed.asSeconds() << std::endl;
-		//	//std::cout << body[i].getPosition().x << " " << body[i].getPosition().y << " \t ";
-		//}
+		for (int i = body.size() - 1; i > 0; --i)
+		{
+			body[i].setPosition(body[i - 1].getPosition().x + spacing_x, body[i - 1].getPosition().y + spacing_y);
+			//std::cout << elapsed.asSeconds() << std::endl;
+			//std::cout << body[i].getPosition().x << " " << body[i].getPosition().y << " \t ";
+		}
 		//std::cout << std::endl;
 	}
 
@@ -118,18 +119,20 @@ void Snake::Move(bool& up, bool& down, bool& right, bool& left)
 		up = false; down = false; right = false; left = false;
 		Reset();
 	}
+	
 
 	// Checks if snake head hits any of its body
-	//for (int i = 1; i < body.size(); i++)
-	//{
-	//	if (body[0].getGlobalBounds().intersects(body[i].getGlobalBounds()))
-	//	{
-	//		isGameOver = true;
-	//		up = false; down = false; right = false; left = false;
-	//		Reset();
-	//		break;
-	//	}
-	//}
+	for (int i = 1; i < body.size(); i++)
+	{
+		//if (body[0].getGlobalBounds().intersects(body[i].getGlobalBounds()))
+		//{
+		//	std::cout << "Intersects" << std::endl;
+		//}
+		if (body[0].getPosition() == body[i].getPosition())
+		{
+			std::cout << "Intersect" << std::endl;
+		}
+	}
 }
 
 void Snake::Extend()
