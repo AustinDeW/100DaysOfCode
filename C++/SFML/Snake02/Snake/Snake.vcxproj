@@ -33,9 +33,6 @@
     <ClInclude Include="Window.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Snake.rc" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{84C39100-6785-4F86-AB3A-92B2201394F2}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
