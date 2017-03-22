@@ -2,6 +2,7 @@
 
 Apple::Apple()
 {
+	srand(time(NULL));
 }
 
 Apple::~Apple()
