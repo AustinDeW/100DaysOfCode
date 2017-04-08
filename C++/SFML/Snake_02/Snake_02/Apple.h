@@ -16,7 +16,7 @@ public:
 	void Spawn(const sf::Vector2u& windowSize);	
 
 private:
-	const float APPLE_BOUNDS = 20;
+	const float APPLE_PADDING = 20;
 	sf::CircleShape apple;
 };
 
